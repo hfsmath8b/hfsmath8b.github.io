@@ -68,7 +68,7 @@ svg .person-label{direction:rtl;font-size:17px}
 .label-symbol{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
 .part-points{display:inline-block;direction:rtl;unicode-bidi:isolate;white-space:nowrap}
 .part-heading>.part-points{flex:0 0 auto;margin:0}
-</style><meta name="theme-color" content="#f7f8fa"><meta name="description" content="מבחן חזרה במתמטיקה לכיתה ח׳: סטטיסטיקה, מערכת הצירים ומלבנים. תרגול עצמאי עם ציון והסברים."><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="site.css"></head>
+</style><meta name="theme-color" content="#f7f8fa"><meta name="description" content="מבחן חזרה במתמטיקה לכיתה ח׳: סטטיסטיקה, מערכת הצירים ומלבנים. תרגול עצמאי עם ציון והסברים."><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="site.css?v=20261028-axes"></head>
 <body>
 <a class="skip-link" href="#quiz">דילוג למבחן</a><header class="site-top"><a class="site-brand" href="./"><span class="brand-mark" aria-hidden="true">ח׳</span> מתמטיקה ח׳</a><a class="top-back" href="./">לכל המבחנים <span aria-hidden="true">←</span></a></header>
 <main>
@@ -197,7 +197,7 @@ function reviewDrawing(q){
  if(q.drawing?.editable)return drawing({...q.drawing,editable:false,values:q.parts.slice(0,q.drawing.labels.length).map(p=>p.answer)});
  const p=q.parts.find(p=>p.plot);
  if(p)return drawing({...q.drawing,points:[...(q.drawing.points||[]),{label:p.pointLabel||'P',x:p.answer[0],y:p.answer[1]}]});
- return drawing(q.drawing);
+ return drawing(coordinateSpec(q));
 }
 
 function updateProgress(){const full=EXAM.questions.filter((q,i)=>answeredParts(i)===q.parts.length).length;$('question-progress').textContent=`שאלה ${state.index+1} מתוך 10`;$('answered-progress').textContent=`${full} מתוך 10 שאלות נענו במלואן`;$('progress-bar').style.width=`${full*10}%`;$('question-nav').replaceChildren();EXAM.questions.forEach((q,i)=>{const n=answeredParts(i),b=document.createElement('button');b.type='button';b.textContent=i+1;b.className=n===q.parts.length?'answered':n?'partial':'';b.setAttribute('aria-label',`שאלה ${i+1}, ${n===q.parts.length?'נענתה':n?'נענתה חלקית':'טרם נענתה'}`);if(i===state.index)b.setAttribute('aria-current','step');b.addEventListener('click',()=>go(i));$('question-nav').append(b);});}
@@ -242,10 +242,113 @@ function partHeading(q,p,j){
  return '<span class="part-heading"><span class="part-label" dir="rtl">'+prefix+formatPartLabel(p.label)+'</span> <span class="part-points" dir="rtl"><bdi dir="ltr">'+fmt(Math.round(1000/q.parts.length)/100)+'</bdi> נקודות</span></span>';
 }
 
+// Given coordinates only; answer keys are never used to build the practice grid.
+const extraCoordinateDrawings={
+ '1-8':{points:[{label:'K',x:-7,y:2},{label:'L',x:1,y:2},{label:'M',x:4,y:-6},{label:'N',x:4,y:3}],segments:[['K','L'],['M','N']]},
+ '2-7':{points:[{label:'A',x:-5,y:-3},{label:'C',x:2,y:-5}],segments:[]},
+ '2-10':{points:[{label:'A',x:-4,y:-4},{label:'B',x:3,y:-4},{label:'C',x:3,y:-1},{label:'D',x:-4,y:-1}],segments:[['A','B'],['B','C'],['C','D'],['D','A']]},
+ '3-6':{points:[{label:'P',x:-3,y:5},{label:'Q',x:4,y:-2},{label:'R',x:0,y:-4},{label:'S',x:6,y:0}],segments:[]},
+ '3-10':{points:[{label:'A',x:0,y:1},{label:'B',x:5,y:1},{label:'C',x:5,y:4},{label:'D',x:0,y:4},{label:'A′',x:-2,y:1}],segments:[['A','B'],['B','C'],['C','D'],['D','A']]}
+};
+function coordinateSpec(q){
+ if(!q.topic.startsWith('מערכת הצירים'))return q.drawing;
+ return q.drawing||{kind:'grid4',min:-8,max:8,...extraCoordinateDrawings[q.id]};
+}
+function coordinateLabel(p){return plain(p.label).match(/[A-Za-z][′″']?/)?.[0]||'P';}
+function validWorkspacePoint(p){return Array.isArray(p)&&p.length===2&&p.every(v=>Number.isInteger(v)&&v>=-8&&v<=8);}
+const workspaceKey=key+'-coordinate-workspace-v1';
+let coordinateNotes={};
+try{
+ const saved=JSON.parse(localStorage.getItem(workspaceKey));
+ if(saved&&typeof saved==='object'&&!Array.isArray(saved)){
+  for(const [id,points]of Object.entries(saved))if(EXAM.questions.some(q=>q.id===id)&&Array.isArray(points)&&points.length<=26&&points.every(validWorkspacePoint))coordinateNotes[id]=points;
+ }
+}catch{}
+function saveCoordinateNotes(){try{localStorage.setItem(workspaceKey,JSON.stringify(coordinateNotes));}catch{storageWorks=false;storageMessage();}}
+function bindCoordinateWorkspace(q){
+ const container=$('question-drawing'),svg=container.querySelector('svg.coordinate-grid');
+ if(!svg)return;
+ const pointParts=q.parts.map((p,j)=>({p,j})).filter(({p})=>p.type==='point');
+ let selected=pointParts[0]?.j??'new';
+ const notes=()=>coordinateNotes[q.id]||(coordinateNotes[q.id]=[]);
+ const toolbar=document.createElement('div');toolbar.className='coordinate-toolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label','בחירת נקודה לסימון');
+ const targets=[];
+ for(const {p,j}of pointParts){
+  const button=document.createElement('button');button.type='button';button.className='secondary coordinate-target';button.textContent='סימון '+coordinateLabel(p);button.dataset.part=j;
+  button.addEventListener('click',()=>{selected=j;refresh();});toolbar.append(button);targets.push({button,j});
+ }
+ const freeButton=document.createElement('button');freeButton.type='button';freeButton.className='secondary coordinate-target';freeButton.textContent='נקודה חופשית';
+ freeButton.addEventListener('click',()=>{selected='new';refresh();});toolbar.append(freeButton);
+ const clear=document.createElement('button');clear.type='button';clear.className='secondary coordinate-clear';clear.textContent='ניקוי הסימון';toolbar.append(clear);
+ const hint=document.createElement('p');hint.className='coordinate-help';hint.id='coordinate-help';hint.textContent='בחרו נקודה וסמנו בלחיצה על הרשת. אפשר גם להקליד שיעורים או להשתמש במקשי החצים.';
+ const status=document.createElement('output');status.id='coordinate-status';status.className='coordinate-status';status.setAttribute('aria-live','polite');
+ container.prepend(toolbar,hint);container.append(status);
+ const ns='http://www.w3.org/2000/svg',markers=document.createElementNS(ns,'g');markers.classList.add('workspace-markers');svg.append(markers);
+ svg.classList.add('coordinate-interactive');svg.setAttribute('tabindex','0');svg.setAttribute('role','group');svg.setAttribute('aria-describedby',hint.id);
+ const coordsFor=j=>{
+  const value=state.answers[state.index][j];
+  if(!isAnswered(q.parts[j],value))return null;
+  const point=value.map(parseNumber);
+  return point.every(v=>v>=-8&&v<=8)?point:null;
+ };
+ function currentCoords(){return typeof selected==='number'?coordsFor(selected):typeof selected==='string'&&selected.startsWith('note-')?notes()[Number(selected.slice(5))]:null;}
+ function addMarker(label,point,active,target){
+  const group=document.createElementNS(ns,'g');group.classList.add('workspace-point');if(active)group.classList.add('active');group.dataset.target=String(target);
+  const circle=document.createElementNS(ns,'circle');circle.setAttribute('cx',260+24*point[0]);circle.setAttribute('cy',250-24*point[1]);circle.setAttribute('r',active?8:6);circle.setAttribute('class','workspace-point-circle');
+  const text=document.createElementNS(ns,'text');text.setAttribute('x',260+24*point[0]+13);text.setAttribute('y',250-24*point[1]+20);text.setAttribute('class','workspace-point-label');text.textContent=label;
+  const title=document.createElementNS(ns,'title');title.textContent=label+' ('+point.join(', ')+')';group.append(title,circle,text);markers.append(group);
+ }
+ function refresh(){
+  markers.replaceChildren();
+  targets.forEach(({button,j})=>{button.setAttribute('aria-pressed',String(selected===j));const point=coordsFor(j);if(point)addMarker(coordinateLabel(q.parts[j]),point,selected===j,j);});
+  notes().forEach((point,i)=>addMarker('P'+(i+1),point,selected==='note-'+i,'note-'+i));
+  freeButton.setAttribute('aria-pressed',String(typeof selected==='string'));
+  clear.disabled=!currentCoords();
+  const label=typeof selected==='number'?coordinateLabel(q.parts[selected]):selected==='new'?'נקודה חופשית':'P'+(Number(selected.slice(5))+1);
+  svg.setAttribute('aria-label','סימון '+label+' במערכת הצירים');
+  const point=currentCoords();status.replaceChildren(document.createTextNode(label+': '));
+  if(point){const value=document.createElement('bdi');value.dir='ltr';value.textContent='('+point.map(fmt).join(', ')+')';status.append(value);}else status.append(document.createTextNode('טרם סומנה'));
+ }
+ function apply(point){
+  if(typeof selected==='number'){
+   answer(selected,point.map(String));
+   ['x','y'].forEach((axis,i)=>{$(`answer-${selected}-${axis}`).value=String(point[i]);});
+  }else{
+   if(selected==='new'){
+    if(notes().length>=26)return;
+    notes().push(point);selected='note-'+(notes().length-1);
+   }else notes()[Number(selected.slice(5))]=point;
+   saveCoordinateNotes();
+  }
+  refresh();
+ }
+ svg.addEventListener('click',event=>{
+  const marker=event.target.closest('.workspace-point');
+  if(marker){const target=marker.dataset.target;selected=/^\d+$/.test(target)?Number(target):target;refresh();return;}
+  const point=new DOMPoint(event.clientX,event.clientY).matrixTransform(svg.getScreenCTM().inverse());
+  if(point.x<68||point.x>452||point.y<58||point.y>442)return;
+  apply([Math.max(-8,Math.min(8,Math.round((point.x-260)/24))),Math.max(-8,Math.min(8,Math.round((250-point.y)/24)))]);
+ });
+ svg.addEventListener('keydown',event=>{
+  if(event.key==='Delete'||event.key==='Backspace'){event.preventDefault();clear.click();return;}
+  if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;
+  event.preventDefault();const point=[...(currentCoords()||[0,0])],axis=['ArrowLeft','ArrowRight'].includes(event.key)?0:1;
+  point[axis]=Math.max(-8,Math.min(8,point[axis]+(['ArrowLeft','ArrowDown'].includes(event.key)?-1:1)));apply(point);
+ });
+ clear.addEventListener('click',()=>{
+  if(typeof selected==='number'){
+   answer(selected,null);['x','y'].forEach(axis=>{$(`answer-${selected}-${axis}`).value='';});
+  }else if(selected!=='new'){notes().splice(Number(selected.slice(5)),1);selected='new';saveCoordinateNotes();}
+  refresh();
+ });
+ for(const {j}of pointParts)for(const axis of ['x','y'])$(`answer-${j}-${axis}`).addEventListener('input',()=>{selected=j;refresh();});
+ refresh();
+}
+
 function renderQuestion(focus=true){
  const q=EXAM.questions[state.index];
  $('topic').textContent=q.topic;$('question-title').innerHTML=q.prompt;
- $('question-drawing').innerHTML=drawing(q.drawing);$('parts').replaceChildren();
+ $('question-drawing').innerHTML=drawing(coordinateSpec(q));$('parts').replaceChildren();
  $('question-table').replaceChildren();
  if(q.answerTable)renderAnswerTable(q);
  if(!q.answerTable&&!q.drawing?.editable)q.parts.forEach((p,j)=>{
@@ -272,14 +375,13 @@ function renderQuestion(focus=true){
     });answers.append(b);
    });field.append(answers);
   }else if(p.inputFormat==='fraction'){renderFractionFields(field,p,j);
-  }else if(p.type==='point'&&p.plot){renderPlotAnswer(field,p,j);
   }else if(p.type==='point'){
-   const hint=document.createElement('p');hint.className='placement-hint';hint.textContent=p.plot?'אפשר לסמן בלחיצה על מערכת הצירים, או להקליד את שני השיעורים.':'הקלידו תחילה את שיעור x ואחריו את שיעור y. הסעיף נבדק לפי שני השיעורים יחד.';field.append(hint);
+   const hint=document.createElement('p');hint.className='placement-hint';hint.textContent='אפשר לסמן את הנקודה על הרשת או להקליד את שיעורי x ו־y.';field.append(hint);
    const row=document.createElement('div');row.className='input-row point-controls';
    ['x','y'].forEach((axis,k)=>{
     const label=document.createElement('label');label.innerHTML=`<span>שיעור <span class="math">${axis}</span></span>`;
     const input=document.createElement('input');input.id=`answer-${j}-${axis}`;input.setAttribute('aria-label',plain(p.label)+' – שיעור '+axis);input.type='text';input.inputMode='decimal';input.dir='ltr';input.autocomplete='off';input.value=state.answers[state.index][j]?.[k]??'';
-    input.addEventListener('input',()=>{const v=['x','y'].map(a=>$(`answer-${j}-${a}`).value);answer(j,v);if(p.plot)updatePlacement(j);});label.append(input);row.append(label);
+    input.addEventListener('input',()=>{const v=['x','y'].map(a=>$(`answer-${j}-${a}`).value);answer(j,v);});label.append(input);row.append(label);
    });field.append(row);
    if(p.plot){const output=document.createElement('output');output.id=`placement-status-${j}`;output.className='placement-status';output.setAttribute('aria-live','polite');field.append(output);}
   }else{
@@ -292,7 +394,7 @@ function renderQuestion(focus=true){
   }
   $('parts').append(field);
  });
- const placement=q.parts.findIndex(p=>p.plot);if(placement>=0)bindPlacement(placement);
+ if(q.topic.startsWith('מערכת הצירים'))bindCoordinateWorkspace(q);
  $('previous').disabled=state.index===0;$('next').hidden=state.index===9;$('finish').hidden=state.index!==9;updateProgress();
  if(q.drawing?.editable)bindBars();
  if(focus){$('question-title').focus();window.scrollTo({top:0,behavior:'instant'});}
@@ -384,7 +486,7 @@ function dialog(title,description,confirmLabel,action,cancelLabel='חזרה למ
 $('dialog-cancel').addEventListener('click',closeDialog);$('dialog-confirm').addEventListener('click',()=>{const a=dialogAction;closeDialog();if(a)a();});$('dialog-overlay').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeDialog();}if(e.key==='Tab'){e.preventDefault();(document.activeElement===$('dialog-cancel')?$('dialog-confirm'):$('dialog-cancel')).focus();}});
 $('previous').addEventListener('click',()=>go(Math.max(0,state.index-1)));$('next').addEventListener('click',()=>go(Math.min(9,state.index+1)));
 $('finish').addEventListener('click',()=>{const missing=EXAM.questions.reduce((n,q,i)=>n+q.parts.length-answeredParts(i),0);dialog('לסיים את המבחן?',missing?`נותרו ${missing} סעיפים ללא תשובה תקינה. סעיפים אלה יקבלו 0 נקודות. אחרי הסיום יוצגו הציון והפתרונות ולא ניתן יהיה לשנות תשובות.`:'כל השאלות נענו. אחרי הסיום יוצגו הציון והפתרונות ולא ניתן יהיה לשנות תשובות.','סיום והצגת הציון',()=>{state.finished=true;save();show();$('result-title').focus();window.scrollTo({top:0,behavior:'instant'});});});
-$('restart').addEventListener('click',()=>dialog('להתחיל מחדש?','התשובות והציון של הניסיון הנוכחי יימחקו מהקובץ הזה בדפדפן. ניתן להדפיס את התוצאות לפני שמתחילים שוב.','התחלה מחדש',()=>{state=fresh();showAll=false;save();show();$('question-title').focus();window.scrollTo({top:0,behavior:'instant'});},'חזרה לתוצאות'));
+$('restart').addEventListener('click',()=>dialog('להתחיל מחדש?','התשובות והציון של הניסיון הנוכחי יימחקו מהקובץ הזה בדפדפן. ניתן להדפיס את התוצאות לפני שמתחילים שוב.','התחלה מחדש',()=>{coordinateNotes={};saveCoordinateNotes();state=fresh();showAll=false;save();show();$('question-title').focus();window.scrollTo({top:0,behavior:'instant'});},'חזרה לתוצאות'));
 $('toggle-review').addEventListener('click',()=>{showAll=!showAll;renderResults();});$('print').addEventListener('click',()=>{showAll=true;renderResults();window.print();});
 show();
 </script>
