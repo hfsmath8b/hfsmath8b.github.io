@@ -255,30 +255,26 @@ function coordinateSpec(q){
  return q.drawing||{kind:'grid4',min:-8,max:8,...extraCoordinateDrawings[q.id]};
 }
 function coordinateLabel(p){return plain(p.label).match(/[A-Za-z][′″']?/)?.[0]||'P';}
-function validWorkspacePoint(p){return Array.isArray(p)&&p.length===2&&p.every(v=>Number.isInteger(v)&&v>=-8&&v<=8);}
-const workspaceKey=key+'-coordinate-workspace-v1';
-let coordinateNotes={};
-try{
- const saved=JSON.parse(localStorage.getItem(workspaceKey));
- if(saved&&typeof saved==='object'&&!Array.isArray(saved)){
-  for(const [id,points]of Object.entries(saved))if(EXAM.questions.some(q=>q.id===id)&&Array.isArray(points)&&points.length<=26&&points.every(validWorkspacePoint))coordinateNotes[id]=points;
- }
-}catch{}
-function saveCoordinateNotes(){try{localStorage.setItem(workspaceKey,JSON.stringify(coordinateNotes));}catch{storageWorks=false;storageMessage();}}
+// Only missing points are editable. Reading existing points and lengths uses a static grid.
+const coordinatePlotParts={
+ '1-6':[0],'1-9':[0,1],'1-10':[2,3],
+ '2-7':[0,1],'2-8':[0],'2-10':[0,1],
+ '3-7':[0],'3-9':[1],'3-10':[1,2]
+};
+function canPlotCoordinate(q,j){return coordinatePlotParts[q.id]?.includes(j)||false;}
+function coordinateName(label){const name=document.createElement('bdi');name.dir='ltr';name.textContent=label;return name;}
 function bindCoordinateWorkspace(q){
+ const pointParts=q.parts.map((p,j)=>({p,j})).filter(({p,j})=>p.type==='point'&&canPlotCoordinate(q,j));
+ if(!pointParts.length)return;
  const container=$('question-drawing'),svg=container.querySelector('svg.coordinate-grid');
  if(!svg)return;
- const pointParts=q.parts.map((p,j)=>({p,j})).filter(({p})=>p.type==='point');
- let selected=pointParts[0]?.j??'new';
- const notes=()=>coordinateNotes[q.id]||(coordinateNotes[q.id]=[]);
+ let selected=pointParts[0].j;
  const toolbar=document.createElement('div');toolbar.className='coordinate-toolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label','בחירת נקודה לסימון');
  const targets=[];
  for(const {p,j}of pointParts){
-  const button=document.createElement('button');button.type='button';button.className='secondary coordinate-target';button.textContent='סימון '+coordinateLabel(p);button.dataset.part=j;
+  const button=document.createElement('button');button.type='button';button.className='secondary coordinate-target';button.append('סימון ',coordinateName(coordinateLabel(p)));button.dataset.part=j;
   button.addEventListener('click',()=>{selected=j;refresh();});toolbar.append(button);targets.push({button,j});
  }
- const freeButton=document.createElement('button');freeButton.type='button';freeButton.className='secondary coordinate-target';freeButton.textContent='נקודה חופשית';
- freeButton.addEventListener('click',()=>{selected='new';refresh();});toolbar.append(freeButton);
  const clear=document.createElement('button');clear.type='button';clear.className='secondary coordinate-clear';clear.textContent='ניקוי הסימון';toolbar.append(clear);
  const hint=document.createElement('p');hint.className='coordinate-help';hint.id='coordinate-help';hint.textContent='בחרו נקודה וסמנו בלחיצה על הרשת. אפשר גם להקליד שיעורים או להשתמש במקשי החצים.';
  const status=document.createElement('output');status.id='coordinate-status';status.className='coordinate-status';status.setAttribute('aria-live','polite');
@@ -291,7 +287,7 @@ function bindCoordinateWorkspace(q){
   const point=value.map(parseNumber);
   return point.every(v=>v>=-8&&v<=8)?point:null;
  };
- function currentCoords(){return typeof selected==='number'?coordsFor(selected):typeof selected==='string'&&selected.startsWith('note-')?notes()[Number(selected.slice(5))]:null;}
+ function currentCoords(){return coordsFor(selected);}
  function addMarker(label,point,active,target){
   const group=document.createElementNS(ns,'g');group.classList.add('workspace-point');if(active)group.classList.add('active');group.dataset.target=String(target);
   const circle=document.createElementNS(ns,'circle');circle.setAttribute('cx',260+24*point[0]);circle.setAttribute('cy',250-24*point[1]);circle.setAttribute('r',active?8:6);circle.setAttribute('class','workspace-point-circle');
@@ -301,30 +297,20 @@ function bindCoordinateWorkspace(q){
  function refresh(){
   markers.replaceChildren();
   targets.forEach(({button,j})=>{button.setAttribute('aria-pressed',String(selected===j));const point=coordsFor(j);if(point)addMarker(coordinateLabel(q.parts[j]),point,selected===j,j);});
-  notes().forEach((point,i)=>addMarker('P'+(i+1),point,selected==='note-'+i,'note-'+i));
-  freeButton.setAttribute('aria-pressed',String(typeof selected==='string'));
   clear.disabled=!currentCoords();
-  const label=typeof selected==='number'?coordinateLabel(q.parts[selected]):selected==='new'?'נקודה חופשית':'P'+(Number(selected.slice(5))+1);
+  const label=coordinateLabel(q.parts[selected]);
   svg.setAttribute('aria-label','סימון '+label+' במערכת הצירים');
-  const point=currentCoords();status.replaceChildren(document.createTextNode(label+': '));
+  const point=currentCoords();status.replaceChildren(coordinateName(label),document.createTextNode(': '));
   if(point){const value=document.createElement('bdi');value.dir='ltr';value.textContent='('+point.map(fmt).join(', ')+')';status.append(value);}else status.append(document.createTextNode('טרם סומנה'));
  }
  function apply(point){
-  if(typeof selected==='number'){
-   answer(selected,point.map(String));
-   ['x','y'].forEach((axis,i)=>{$(`answer-${selected}-${axis}`).value=String(point[i]);});
-  }else{
-   if(selected==='new'){
-    if(notes().length>=26)return;
-    notes().push(point);selected='note-'+(notes().length-1);
-   }else notes()[Number(selected.slice(5))]=point;
-   saveCoordinateNotes();
-  }
+  answer(selected,point.map(String));
+  ['x','y'].forEach((axis,i)=>{$(`answer-${selected}-${axis}`).value=String(point[i]);});
   refresh();
  }
  svg.addEventListener('click',event=>{
   const marker=event.target.closest('.workspace-point');
-  if(marker){const target=marker.dataset.target;selected=/^\d+$/.test(target)?Number(target):target;refresh();return;}
+  if(marker){selected=Number(marker.dataset.target);refresh();return;}
   const point=new DOMPoint(event.clientX,event.clientY).matrixTransform(svg.getScreenCTM().inverse());
   if(point.x<68||point.x>452||point.y<58||point.y>442)return;
   apply([Math.max(-8,Math.min(8,Math.round((point.x-260)/24))),Math.max(-8,Math.min(8,Math.round((250-point.y)/24)))]);
@@ -336,9 +322,7 @@ function bindCoordinateWorkspace(q){
   point[axis]=Math.max(-8,Math.min(8,point[axis]+(['ArrowLeft','ArrowDown'].includes(event.key)?-1:1)));apply(point);
  });
  clear.addEventListener('click',()=>{
-  if(typeof selected==='number'){
-   answer(selected,null);['x','y'].forEach(axis=>{$(`answer-${selected}-${axis}`).value='';});
-  }else if(selected!=='new'){notes().splice(Number(selected.slice(5)),1);selected='new';saveCoordinateNotes();}
+  answer(selected,null);['x','y'].forEach(axis=>{$(`answer-${selected}-${axis}`).value='';});
   refresh();
  });
  for(const {j}of pointParts)for(const axis of ['x','y'])$(`answer-${j}-${axis}`).addEventListener('input',()=>{selected=j;refresh();});
@@ -376,7 +360,7 @@ function renderQuestion(focus=true){
    });field.append(answers);
   }else if(p.inputFormat==='fraction'){renderFractionFields(field,p,j);
   }else if(p.type==='point'){
-   const hint=document.createElement('p');hint.className='placement-hint';hint.textContent='אפשר לסמן את הנקודה על הרשת או להקליד את שיעורי x ו־y.';field.append(hint);
+   const hint=document.createElement('p');hint.className='placement-hint';hint.textContent=canPlotCoordinate(q,j)?'אפשר לסמן את הנקודה על הרשת או להקליד את שיעורי x ו־y.':'הקלידו את שיעורי x ו־y של הנקודה המסומנת.';field.append(hint);
    const row=document.createElement('div');row.className='input-row point-controls';
    ['x','y'].forEach((axis,k)=>{
     const label=document.createElement('label');label.innerHTML=`<span>שיעור <span class="math">${axis}</span></span>`;
@@ -486,7 +470,7 @@ function dialog(title,description,confirmLabel,action,cancelLabel='חזרה למ
 $('dialog-cancel').addEventListener('click',closeDialog);$('dialog-confirm').addEventListener('click',()=>{const a=dialogAction;closeDialog();if(a)a();});$('dialog-overlay').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeDialog();}if(e.key==='Tab'){e.preventDefault();(document.activeElement===$('dialog-cancel')?$('dialog-confirm'):$('dialog-cancel')).focus();}});
 $('previous').addEventListener('click',()=>go(Math.max(0,state.index-1)));$('next').addEventListener('click',()=>go(Math.min(9,state.index+1)));
 $('finish').addEventListener('click',()=>{const missing=EXAM.questions.reduce((n,q,i)=>n+q.parts.length-answeredParts(i),0);dialog('לסיים את המבחן?',missing?`נותרו ${missing} סעיפים ללא תשובה תקינה. סעיפים אלה יקבלו 0 נקודות. אחרי הסיום יוצגו הציון והפתרונות ולא ניתן יהיה לשנות תשובות.`:'כל השאלות נענו. אחרי הסיום יוצגו הציון והפתרונות ולא ניתן יהיה לשנות תשובות.','סיום והצגת הציון',()=>{state.finished=true;save();show();$('result-title').focus();window.scrollTo({top:0,behavior:'instant'});});});
-$('restart').addEventListener('click',()=>dialog('להתחיל מחדש?','התשובות והציון של הניסיון הנוכחי יימחקו מהקובץ הזה בדפדפן. ניתן להדפיס את התוצאות לפני שמתחילים שוב.','התחלה מחדש',()=>{coordinateNotes={};saveCoordinateNotes();state=fresh();showAll=false;save();show();$('question-title').focus();window.scrollTo({top:0,behavior:'instant'});},'חזרה לתוצאות'));
+$('restart').addEventListener('click',()=>dialog('להתחיל מחדש?','התשובות והציון של הניסיון הנוכחי יימחקו מהקובץ הזה בדפדפן. ניתן להדפיס את התוצאות לפני שמתחילים שוב.','התחלה מחדש',()=>{state=fresh();showAll=false;save();show();$('question-title').focus();window.scrollTo({top:0,behavior:'instant'});},'חזרה לתוצאות'));
 $('toggle-review').addEventListener('click',()=>{showAll=!showAll;renderResults();});$('print').addEventListener('click',()=>{showAll=true;renderResults();window.print();});
 show();
 </script>
