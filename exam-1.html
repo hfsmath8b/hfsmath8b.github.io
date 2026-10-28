@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>מבחן חזרה 1 · מתמטיקה לכיתה ח׳</title>
+<style>
+:root{--ink:#182d49;--muted:#526275;--blue:#225bd5;--line:#dce5ef;--green:#11684b;--red:#a52d46;--paper:#f5f7fa}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;line-height:1.65}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #df9b24;outline-offset:4px}button:disabled{cursor:default;opacity:.4}main{max-width:880px;margin:32px auto;padding:0 24px}header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.eyebrow{font-size:14px;color:var(--muted);margin:0 0 2px}h1{font-size:29px;line-height:1.3;margin:0}.badge{font-size:13px;color:var(--blue);background:#eaf0fc;padding:5px 11px;border-radius:30px;white-space:nowrap}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:28px 32px;min-width:0}.intro h2{font-size:25px;margin:0 0 12px}.intro p{margin:10px 0}.intro ul{padding-right:23px;margin:18px 0 23px}.intro li{margin:8px 0}.facts{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.facts span{border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:14px}.primary,.secondary{border-radius:9px;padding:10px 20px;font-weight:bold;border:1px solid transparent}.primary{background:var(--blue);color:white}.primary:hover{background:#1749b7}.secondary{background:white;border-color:#ccd8e7;color:var(--ink)}.secondary:hover{background:#f2f6ff}.quiet{font-size:14px;color:var(--muted)}.status{font-size:13px;color:var(--muted);margin:12px 0}.progress-header{display:flex;justify-content:space-between;gap:12px;font-size:14px;margin:0 0 9px;color:var(--muted)}.track{height:5px;background:#e1e8f1;border-radius:10px;overflow:hidden;margin-bottom:16px}.track>span{display:block;height:100%;background:var(--blue);transition:width .2s}.question-nav{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;margin-bottom:18px}.question-nav button{border:1px solid #cbd7e7;border-radius:7px;min-height:38px;background:white;color:var(--ink);font-weight:bold;padding:3px}.question-nav button.answered{background:#e7eefc;border-color:#a5bee9}.question-nav button.partial{background:linear-gradient(90deg,#e7eefc 50%,white 50%)}.question-nav button[aria-current=step]{outline:2px solid var(--blue);outline-offset:1px}.card-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-size:14px;color:var(--muted)}.topic{color:var(--blue);font-weight:bold}.question-title{font-size:23px;line-height:1.65;margin:0 0 15px}.question-title:focus,#result-title:focus{outline:none}.visual{margin:18px 0;background:#f8fafc;border:1px solid #e6edf5;border-radius:12px;padding:12px;text-align:center}.visual svg{max-width:100%;height:auto;max-height:350px;display:block;margin:auto}.visual svg.coordinate-grid{max-height:410px}.diagram-note{font-size:12px;color:var(--muted);text-align:center;margin:3px 0 0}.part{margin:22px 0 0;padding:0;border:0;min-width:0;width:100%}.part+.part{border-top:1px solid var(--line);padding-top:20px}.part legend{float:right;width:100%;font-size:18px;font-weight:bold;margin-bottom:10px;padding:0}.part legend+*{clear:both}.part-points{font-size:12px;color:var(--muted);font-weight:normal;margin-inline-start:7px}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.answer{background:white;border:1.5px solid #d3ddea;min-height:60px;border-radius:10px;display:flex;align-items:center;gap:12px;text-align:right;padding:12px;color:var(--ink);font-size:20px;width:100%}.answer:hover{background:#f2f6ff;border-color:#789ee9}.answer[aria-pressed=true]{border-color:var(--blue);background:#edf3ff;box-shadow:inset 0 0 0 1px var(--blue)}.letter{display:grid;place-items:center;min-width:27px;height:27px;font-size:13px;border-radius:6px;background:#f0f4f8;color:var(--muted);flex-shrink:0}.answer[aria-pressed=true] .letter{background:var(--blue);color:white}.choice-value{min-width:0;flex:1}.input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.input-row input{width:200px;max-width:100%;border:1.5px solid #b5c8e0;border-radius:8px;padding:10px 13px;color:var(--ink);background:white;font-size:22px;text-align:center}.input-row input:focus{border-color:var(--blue)}.number-help{font-size:12px;color:var(--muted);margin:7px 0 0}.footer-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:26px;padding-top:20px}.finish-hint{font-size:13px;color:var(--muted);margin:16px 0 0;text-align:center}.math{max-width:100%;display:inline-block;direction:ltr;unicode-bidi:isolate;font-family:"Cambria Math","Times New Roman",serif;white-space:nowrap;vertical-align:middle}.answer .math{overflow-x:auto;overflow-y:hidden}.math sup{line-height:0}svg text{font-family:Arial,sans-serif;direction:ltr;unicode-bidi:isolate;fill:#243b58;font-size:17px}svg .grid{stroke:#dce5ef;stroke-width:1}svg .axis{stroke:#62758c;stroke-width:1.6}svg .geometry{stroke:#225bd5;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}svg .point{fill:#225bd5}svg .arc{stroke:#bd6b1b;stroke-width:2;fill:none}svg .arc-label{fill:#9d5514;font-size:17px}svg .point-label{font-weight:bold;paint-order:stroke;stroke:#f8fafc;stroke-width:5;stroke-linejoin:round}.score-card{text-align:center;padding-top:25px;padding-bottom:25px}.score-card h2{font-size:25px;margin:0}.score{direction:ltr;unicode-bidi:isolate;font-size:64px;font-weight:bold;line-height:1.2;color:var(--blue);margin:12px 0}.score small{font-size:24px;color:var(--muted);font-weight:normal}.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:17px}.review-header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:27px 0 15px}.review-header h3{margin:0;font-size:21px}.review{margin:15px 0}.review h3{font-size:20px;margin:0 0 10px}.review .prompt{margin:8px 0 15px;font-size:18px}.review-part{border-right:3px solid var(--line);padding:12px 15px;background:#f8fafc;border-radius:7px;margin:12px 0}.review-part.wrong{border-right-color:var(--red);background:#fff5f6}.review-part.correct{border-right-color:var(--green);background:#f0f8f4}.review-part p{margin:5px 0}.bad{color:var(--red)}.good{color:var(--green)}.solution{border-top:1px solid #dce5ef;padding-top:8px!important;margin-top:10px!important}.empty-review{text-align:center;padding:28px}.page-footer{text-align:center;color:var(--muted);font-size:12px;margin:22px 0}.dialog-overlay{position:fixed;inset:0;background:#182d4980;z-index:100;display:grid;place-items:center;padding:20px}.dialog{background:white;max-width:490px;width:100%;border-radius:15px;padding:27px;box-shadow:0 12px 80px #182d4940}.dialog h2{margin:0 0 12px;font-size:24px}.dialog p{margin:0 0 20px}.dialog-actions{display:flex;flex-wrap:wrap;gap:10px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}body.modal-open{overflow:hidden}@media(max-width:640px){main{margin:22px auto;padding:0 15px}h1{font-size:25px}.card{padding:23px 18px}.question-title{font-size:21px}.answers{grid-template-columns:1fr}.answer{font-size:20px;min-height:55px}.question-nav{gap:5px}.question-nav button{min-height:35px}.visual{padding:5px}.badge{font-size:11px;padding:5px 8px}.part legend{font-size:17px}.footer-nav button{padding:10px 15px}svg text{font-size:18px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}@media print{body{background:white}main{max-width:none;margin:0;padding:0}.question-nav,.footer-nav,.result-actions,.review-header button,.dialog-overlay,.status,.page-footer{display:none!important}.card{break-inside:avoid;border-color:#aaa}.review{break-inside:avoid}.score{font-size:40px}.visual svg{max-height:240px}.badge{display:none}#intro,#quiz{display:none!important}}
+.angle-symbol{display:inline-block;width:1em;height:1em;vertical-align:-.13em;margin-inline-end:.06em;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.fraction-expression{font-family:"Cambria Math","Times New Roman",serif;font-size:1em;math-style:normal;direction:ltr}
+.home-link{display:inline-flex;align-items:center;text-decoration:none}.home-link:focus-visible{outline:3px solid #df9b24;outline-offset:4px}
+svg .context-axis-title{direction:rtl;font-size:17px;font-weight:bold}
+svg .person-label{direction:rtl;font-size:17px}
+.data-table{border-collapse:collapse;width:100%;font-size:17px;margin:16px 0}.data-table th,.data-table td{border:1px solid var(--line);padding:8px;text-align:center}.data-table th{background:#edf3fa}.multi-instruction{font-size:14px;color:var(--muted);margin:4px 0 10px}.answer.multiple .letter{border:1px solid #9aabc2;background:white;border-radius:4px}.answer.multiple[aria-pressed=true] .letter{color:white;background:var(--blue)}.diagram-option{display:block;text-align:center;padding:12px}.diagram-option>.letter{display:inline-grid;margin-left:8px}.diagram-option .choice-value{display:inline}.option-diagram{display:block;margin-top:12px;background:#f8fafc;border-radius:8px;padding:7px}.option-diagram>svg{display:block;width:100%;height:auto;max-height:270px}.option-diagram svg text{font-size:21px}.point-controls{display:flex;flex-wrap:wrap;gap:14px;align-items:end}.point-controls label{display:flex;flex-direction:column;gap:5px;max-width:150px}.point-controls input{width:100%}.placement-hint{font-size:14px;color:var(--blue);margin:8px 0}.placement-status{display:block;font-size:18px;text-align:center;min-height:30px;margin:12px 0}.clickable-diagram{cursor:crosshair;touch-action:manipulation}.clickable-diagram:focus-visible{outline:3px solid #df9b24;outline-offset:2px}.answer-list{display:flex;flex-wrap:wrap;gap:7px}.answer-list>span{background:#fff;border:1px solid var(--line);padding:3px 8px;border-radius:5px}.review-option{max-width:340px}.review-option .visual{margin:10px 0}.review-option svg{max-height:230px}@media(max-width:640px){.answers.with-diagrams{grid-template-columns:1fr}.data-table{font-size:15px}.data-table td,.data-table th{padding:6px 4px}}
+.point-controls{direction:ltr;justify-content:flex-end;flex-wrap:nowrap}
+.point-controls label{direction:rtl;text-align:right;flex:0 1 150px;min-width:0}
+</style>
+<style>.data-row{direction:ltr;unicode-bidi:isolate;display:block;text-align:center;padding:12px 8px;font:22px Arial;background:#edf3ff;border-radius:8px;margin:14px 0;overflow-x:auto;white-space:nowrap}.question-title{font-size:21px}.question-title .data-table{font-weight:normal}.data-table caption{font-size:15px;text-align:right;color:var(--muted);padding:7px}.bar-label{font-size:16px}.chart-caption{font-size:14px;font-weight:bold;text-align:center;margin:3px}.grid-numbers{font-size:13px;paint-order:stroke;stroke:#f8fafc;stroke-width:3}.visual svg.coordinate-grid{max-height:440px}.point-controls{justify-content:flex-start}header{align-items:flex-start}.bar-input{max-width:130px}.footer-nav{clear:both}@media(max-width:450px){header{flex-wrap:wrap}.question-nav{grid-template-columns:repeat(5,1fr)}.data-row{font-size:18px}.data-table{font-size:14px}.part legend{float:none} .visual svg.coordinate-grid{max-height:none}}@media print{header .home-link{display:none}.review{break-inside:auto}.review-part{break-inside:avoid}.data-row{white-space:normal}.question-title{font-size:18px}}</style><style>.answers.wide-options{grid-template-columns:1fr}.part legend{float:none}.point-controls{justify-content:flex-end}</style><style>.frequency-input-table{table-layout:fixed;margin:20px 0 6px}
+.frequency-input-table th:first-child{width:24%}
+.frequency-input-table th,.frequency-input-table td{padding:12px 8px}
+.frequency-input-table input{display:block;width:100%;min-width:0;min-height:48px;padding:6px 2px;border:2px solid #122640;border-radius:0;background:#fff;color:#112640;box-shadow:inset 2px 2px 0 #d7e8ed;text-align:center;font-size:22px}
+@media(max-width:450px){.frequency-input-table{font-size:14px}.frequency-input-table th,.frequency-input-table td{padding:8px 3px}.frequency-input-table input{font-size:18px;min-height:44px}.frequency-input-table th:first-child{width:26%}}
+</style><style>.mean-method{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;width:100%;font-size:17px}
+.method-description{line-height:1.55}
+.mean-fraction{display:inline-flex;flex-direction:column;align-items:stretch;align-self:center;max-width:100%;font:22px/1.5 "Cambria Math","Times New Roman",serif;text-align:center;unicode-bidi:isolate;padding:0 4px}
+.mean-numerator{display:flex;flex-wrap:wrap;justify-content:center;gap:0 5px;border-bottom:1.5px solid currentColor;padding:0 6px 3px}
+.sum-term{white-space:nowrap}.mean-denominator{padding-top:2px}
+.answer:has(.mean-method){padding:15px 14px;align-items:flex-start}
+.review-part .mean-method{padding:10px 0}
+@media(max-width:450px){.mean-method{font-size:16px}.mean-fraction{font-size:20px}.answer:has(.mean-method){padding:12px 10px;gap:8px}}
+</style><style>.visual svg.editable-bars{width:100%;max-height:430px}
+.editable-bars .bar-control{cursor:ns-resize;touch-action:none;outline:none}
+.editable-bars .student-bar{fill:#a5edff;stroke:#122640;stroke-width:2}
+.bar-handle-line{stroke:#122640;stroke-width:3;stroke-dasharray:4 3}
+.bar-handle{fill:#fff;stroke:#122640;stroke-width:2.5}
+.bar-value{font-size:16px;font-weight:bold;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:3px}
+.is-set .bar-handle-line{stroke-dasharray:none}.is-set .bar-handle{fill:#60e99a}
+.bar-control:hover .bar-hit{fill:#4bbded14}
+.bar-control:focus-visible .bar-hit{stroke:#15274b;stroke-width:2;stroke-dasharray:5 4;fill:#4bbded14}
+.bar-controls-help,.bar-controls-status{text-align:center;font-size:14px;line-height:1.6;margin:8px 0}
+.bar-controls-status{font-weight:bold;color:#254e67}
+</style><style>.fraction-input{display:flex;flex-direction:column;gap:8px;width:112px;max-width:100%;padding:4px 0;margin:5px 0}
+.fraction-input input{display:block;width:100%;min-width:0;min-height:48px;border:2px solid #122640;border-radius:0;background:#fff;color:#112640;padding:8px;text-align:center;font-size:22px;box-shadow:inset 2px 2px 0 #d7e8ed}
+.fraction-input input::placeholder{font-size:16px;color:#526275;opacity:1}
+.fraction-line{display:block;height:2px;background:#122640;margin:0 -4px}
+.fraction-input input[aria-invalid=true]{border-color:#a52d46}
+.fraction-error{color:#a52d46;font-size:13px;margin:7px 0}
+.stacked-fraction{display:inline-flex;flex-direction:column;align-items:stretch;min-width:36px;margin:0 5px;vertical-align:middle;text-align:center;font:22px/1.4 "Cambria Math","Times New Roman",serif;unicode-bidi:isolate}
+.stacked-fraction>span:first-child{border-bottom:1.5px solid currentColor;padding:0 6px 2px}.stacked-fraction>span:last-child{padding:2px 6px 0}
+</style><style>.calculator-toggle{position:fixed;left:18px;bottom:18px;z-index:41;min-width:110px}
+.calculator-panel{position:fixed;left:18px;bottom:80px;z-index:40;width:292px;max-width:calc(100vw - 36px);max-height:calc(100dvh - 100px);overflow:auto;background:#ecfaff;border:3px solid #122640;box-shadow:5px 5px 0 #142847;padding:14px;color:#112640}
+.calculator-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}.calculator-heading h2{font-size:22px;margin:0}
+.calculator-close{border:0;background:transparent;color:inherit;font-size:25px;width:36px;height:36px;line-height:1}
+.calculator-panel>label{display:block;font-size:13px;margin-bottom:4px}
+#calculator-expression{width:100%;min-height:46px;padding:8px;border:2px solid #122640;border-radius:0;background:#fff;color:#112640;box-shadow:inset 2px 2px 0 #d7e8ed;font:20px/1.3 Arial;text-align:left}
+.calculator-result{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0;min-height:36px;font-size:13px}
+#calculator-result{font-size:25px;line-height:1.3;overflow-wrap:anywhere;text-align:left;min-width:0}
+.calculator-keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.calculator-keys button{min-height:44px;border:2px solid #122640;border-radius:0;background:#fff7e9;color:#112640;font-size:21px;box-shadow:2px 2px 0 #142847}
+.calculator-keys button:hover{background:#ffdeb7}.calculator-keys .calculator-operator{background:#ffd19a}.calculator-keys .calculator-equals{background:#60e99a}
+#calculator-help{font-size:12px;line-height:1.6;margin:12px 0 0}.calculator-error{font-size:13px;color:#a52d46;margin:8px 0}
+@media(min-width:1100px){body.calculator-open main{margin-left:max(320px,calc((100% - 880px)/2))}}
+@media(max-width:450px){.calculator-toggle{left:12px;bottom:12px;min-height:44px}.calculator-panel{left:12px;bottom:72px;width:280px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 88px)}}
+@media print{.calculator-toggle,.calculator-panel{display:none!important}body.calculator-open main{margin-left:0}}
+</style><style>.part-heading{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;direction:rtl}
+.part-label{min-width:0;direction:rtl;unicode-bidi:isolate;text-align:right}
+.label-symbol{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.part-points{display:inline-block;direction:rtl;unicode-bidi:isolate;white-space:nowrap}
+.part-heading>.part-points{flex:0 0 auto;margin:0}
+</style><meta name="theme-color" content="#f7f8fa"><meta name="description" content="מבחן חזרה במתמטיקה לכיתה ח׳: סטטיסטיקה, מערכת הצירים ומלבנים. תרגול עצמאי עם ציון והסברים."><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="site.css"></head>
+<body>
+<a class="skip-link" href="#quiz">דילוג למבחן</a><header class="site-top"><a class="site-brand" href="./"><span class="brand-mark" aria-hidden="true">ח׳</span> מתמטיקה ח׳</a><a class="top-back" href="./">לכל המבחנים <span aria-hidden="true">←</span></a></header>
+<main>
+<header><div><p class="eyebrow">מתמטיקה ח · תרגילי חזרה למבחן 1</p><h1 id="title"></h1></div><a class="secondary home-link" href="./">לכל המבחנים</a></header>
+<section id="quiz" hidden aria-label="המבחן"><div class="progress-header"><span id="question-progress"></span><span id="answered-progress" aria-live="polite"></span></div><div class="track" aria-hidden="true"><span id="progress-bar"></span></div><nav id="question-nav" class="question-nav" aria-label="מעבר בין שאלות"></nav><article class="card"><div class="card-meta"><span id="topic" class="topic"></span><span>10 נקודות</span></div><h2 id="question-title" class="question-title" tabindex="-1"></h2><div id="question-drawing"></div><div id="question-table"></div><div id="parts"></div><div class="footer-nav"><button id="previous" class="secondary">→ השאלה הקודמת</button><button id="next" class="primary">השאלה הבאה ←</button><button id="finish" class="primary" hidden>סיום המבחן וקבלת ציון</button></div></article><p class="finish-hint">אפשר לחזור לכל שאלה בעזרת המספרים למעלה. הבדיקה תיערך רק בסיום.</p></section>
+<section id="results" hidden aria-labelledby="result-title"><div class="card score-card"><h2 id="result-title" tabindex="-1">המבחן הסתיים</h2><div class="score"><span id="score-value"></span><small> / 100</small></div><p id="result-summary"></p><div class="result-actions"><a class="secondary home-link" href="./">לכל המבחנים</a><button id="restart" class="secondary">פתרון מחדש</button><button id="print" class="secondary">הדפסת התוצאות</button></div></div><div class="review-header"><h3 id="review-title">הטעויות והסברים לתיקון</h3><button id="toggle-review" class="secondary" aria-pressed="false">הצגת כל הפתרונות</button></div><div id="review-list"></div></section>
+<p id="storage-status" class="status" role="status" hidden></p>
+<noscript><p class="card">כדי לענות על המבחן ולקבל ציון, יש לפתוח את הקובץ בדפדפן שבו JavaScript מופעל.</p></noscript>
+<button id="calculator-toggle" class="secondary calculator-toggle" type="button" aria-expanded="false" aria-controls="calculator-panel">מחשבון</button>
+<aside id="calculator-panel" class="calculator-panel" aria-labelledby="calculator-title" hidden>
+ <div class="calculator-heading"><h2 id="calculator-title">מחשבון</h2><button id="calculator-close" class="calculator-close" type="button" aria-label="סגירת המחשבון">×</button></div>
+ <label for="calculator-expression">תרגיל</label>
+ <input id="calculator-expression" type="text" dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="240" placeholder="(6+8+10)÷3" aria-describedby="calculator-help calculator-error">
+ <div class="calculator-result"><span>תוצאה</span><output id="calculator-result" dir="ltr" aria-live="polite">—</output></div>
+ <p id="calculator-error" class="calculator-error" role="status" hidden></p>
+ <div class="calculator-keys" dir="ltr">
+  <button type="button" data-calc-action="clear" aria-label="ניקוי החישוב">C</button><button type="button" data-calc-action="backspace" aria-label="מחיקת תו אחרון">⌫</button><button type="button" data-calc-key="(" aria-label="פתיחת סוגריים">(</button><button type="button" data-calc-key=")" aria-label="סגירת סוגריים">)</button>
+  <button type="button" data-calc-key="7">7</button><button type="button" data-calc-key="8">8</button><button type="button" data-calc-key="9">9</button><button type="button" data-calc-key="÷" class="calculator-operator" aria-label="חילוק">÷</button>
+  <button type="button" data-calc-key="4">4</button><button type="button" data-calc-key="5">5</button><button type="button" data-calc-key="6">6</button><button type="button" data-calc-key="×" class="calculator-operator" aria-label="כפל">×</button>
+  <button type="button" data-calc-key="1">1</button><button type="button" data-calc-key="2">2</button><button type="button" data-calc-key="3">3</button><button type="button" data-calc-key="−" class="calculator-operator" aria-label="חיסור">−</button>
+  <button type="button" data-calc-key="0">0</button><button type="button" data-calc-key="." aria-label="נקודה עשרונית">.</button><button type="button" data-calc-action="equals" class="calculator-equals" aria-label="חישוב התוצאה">=</button><button type="button" data-calc-key="+" class="calculator-operator" aria-label="חיבור">+</button>
+ </div>
+ <p id="calculator-help">לחישוב ממוצע: חברו את הנתונים, לחצו = ואז חלקו במספר הנתונים. אפשר גם להקליד תרגיל עם סוגריים.</p>
+</aside>
+
+</main>
+<div id="dialog-overlay" class="dialog-overlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" aria-describedby="dialog-description"><h2 id="dialog-title"></h2><p id="dialog-description"></p><div class="dialog-actions"><button id="dialog-confirm" class="primary"></button><button id="dialog-cancel" class="secondary">חזרה למבחן</button></div></section></div>
+<script id="exam-data" type="application/json">{"number": 1, "revision": "math8-varied-20261027-v2", "title": "מבחן חזרה 1", "questions": [{"topic": "סטטיסטיקה · בניית טבלת שכיחויות", "prompt": "נרשם מספר ההודעות שנשלחו בקבוצת הלמידה בכל אחד מ־10 ימים:\u003cdiv class=\"data-row\" dir=\"ltr\">4, 1, 2, 0, 2, 3, 1, 2, 4, 1\u003c/div>השלימו את השכיחות של כל מספר הודעות.", "parts": [{"type": "number", "label": "שכיחות של \u003cspan class=\"math\">0\u003c/span> הודעות", "answer": 1, "explanation": "הערך \u003cspan class=\"math\">0\u003c/span> מופיע ברשימה \u003cspan class=\"math\">1\u003c/span> פעמים.", "unit": ""}, {"type": "number", "label": "שכיחות של \u003cspan class=\"math\">1\u003c/span> הודעות", "answer": 3, "explanation": "הערך \u003cspan class=\"math\">1\u003c/span> מופיע ברשימה \u003cspan class=\"math\">3\u003c/span> פעמים.", "unit": ""}, {"type": "number", "label": "שכיחות של \u003cspan class=\"math\">2\u003c/span> הודעות", "answer": 3, "explanation": "הערך \u003cspan class=\"math\">2\u003c/span> מופיע ברשימה \u003cspan class=\"math\">3\u003c/span> פעמים.", "unit": ""}, {"type": "number", "label": "שכיחות של \u003cspan class=\"math\">3\u003c/span> הודעות", "answer": 1, "explanation": "הערך \u003cspan class=\"math\">3\u003c/span> מופיע ברשימה \u003cspan class=\"math\">1\u003c/span> פעמים.", "unit": ""}, {"type": "number", "label": "שכיחות של \u003cspan class=\"math\">4\u003c/span> הודעות", "answer": 2, "explanation": "הערך \u003cspan class=\"math\">4\u003c/span> מופיע ברשימה \u003cspan class=\"math\">2\u003c/span> פעמים.", "unit": ""}], "drawing": null, "sourceExercise": "סטטיסטיקה 1, 9", "observations": [4, 1, 2, 0, 2, 3, 1, 2, 4, 1], "answerTable": {"values": [0, 1, 2, 3, 4], "valueLabel": "מספר הודעות", "answerLabel": "שכיחות (מספר ימים)"}, "id": "1-1"}, {"topic": "סטטיסטיקה · סידור נתונים וחציון", "prompt": "זמני ההליכה לבית הספר, בדקות, של 9 תלמידים:\u003cdiv class=\"data-row\" dir=\"ltr\">18, 12, 9, 15, 12, 21, 6, 18, 12\u003c/div>", "parts": [{"type": "choice", "label": "איזו רשימה מסודרת נכון מהקטן לגדול?", "options": ["\u003cspan class=\"math\">6, 9, 12, 12, 12, 15, 18, 18, 21\u003c/span>", "\u003cspan class=\"math\">6, 9, 12, 12, 15, 18, 18, 18, 21\u003c/span>", "\u003cspan class=\"math\">21, 18, 18, 15, 12, 12, 12, 9, 6\u003c/span>", "\u003cspan class=\"math\">6, 9, 12, 15, 12, 12, 18, 18, 21\u003c/span>"], "answer": 0, "explanation": "יש לשמור את כל תשעת הנתונים ואת מספר המופעים של כל ערך, ולסדר בסדר עולה."}, {"type": "number", "label": "מה החציון?", "answer": 12, "explanation": "יש 9 נתונים, ולכן החציון הוא הנתון החמישי ברשימה המסודרת: \u003cspan class=\"math\">12\u003c/span>.", "unit": "דקות"}, {"type": "number", "label": "מה השכיח?", "answer": 12, "explanation": "הזמן \u003cspan class=\"math\">12\u003c/span> דקות מופיע שלוש פעמים, יותר מכל זמן אחר.", "unit": "דקות"}], "drawing": null, "sourceExercise": "סטטיסטיקה 3", "observations": [18, 12, 9, 15, 12, 21, 6, 18, 12], "id": "1-2"}, {"topic": "סטטיסטיקה · ממוצע וחציון במספר זוגי של נתונים", "prompt": "אלה הציונים של 8 תלמידים:\u003cdiv class=\"data-row\" dir=\"ltr\">86, 62, 94, 78, 70, 94, 74, 90\u003c/div>", "parts": [{"type": "choice", "label": "איזו דרך מחשבת נכון את ממוצע הציונים?", "options": ["\u003cspan class=\"mean-method\">\u003cspan class=\"method-description\">מחברים את כל הציונים ומחלקים במספר הציונים השונים.\u003c/span>\u003cspan class=\"mean-fraction\" dir=\"ltr\" role=\"math\" aria-label=\"(86+62+94+78+70+94+74+90) / 7\">\u003cspan class=\"mean-numerator\">\u003cspan class=\"sum-term\">86 + \u003c/span>\u003cspan class=\"sum-term\">62 + \u003c/span>\u003cspan class=\"sum-term\">94 + \u003c/span>\u003cspan class=\"sum-term\">78 + \u003c/span>\u003cspan class=\"sum-term\">70 + \u003c/span>\u003cspan class=\"sum-term\">94 + \u003c/span>\u003cspan class=\"sum-term\">74 + \u003c/span>\u003cspan class=\"sum-term\">90\u003c/span>\u003c/span>\u003cspan class=\"mean-denominator\">7\u003c/span>\u003c/span>\u003c/span>", "\u003cspan class=\"mean-method\">\u003cspan class=\"method-description\">מחברים את כל הציונים ומחלקים במספר התלמידים.\u003c/span>\u003cspan class=\"mean-fraction\" dir=\"ltr\" role=\"math\" aria-label=\"(86+62+94+78+70+94+74+90) / 8\">\u003cspan class=\"mean-numerator\">\u003cspan class=\"sum-term\">86 + \u003c/span>\u003cspan class=\"sum-term\">62 + \u003c/span>\u003cspan class=\"sum-term\">94 + \u003c/span>\u003cspan class=\"sum-term\">78 + \u003c/span>\u003cspan class=\"sum-term\">70 + \u003c/span>\u003cspan class=\"sum-term\">94 + \u003c/span>\u003cspan class=\"sum-term\">74 + \u003c/span>\u003cspan class=\"sum-term\">90\u003c/span>\u003c/span>\u003cspan class=\"mean-denominator\">8\u003c/span>\u003c/span>\u003c/span>", "\u003cspan class=\"mean-method\">\u003cspan class=\"method-description\">סופרים כל ציון שונה פעם אחת ומחלקים במספר הציונים השונים.\u003c/span>\u003cspan class=\"mean-fraction\" dir=\"ltr\" role=\"math\" aria-label=\"(86+62+94+78+70+74+90) / 7\">\u003cspan class=\"mean-numerator\">\u003cspan class=\"sum-term\">86 + \u003c/span>\u003cspan class=\"sum-term\">62 + \u003c/span>\u003cspan class=\"sum-term\">94 + \u003c/span>\u003cspan class=\"sum-term\">78 + \u003c/span>\u003cspan class=\"sum-term\">70 + \u003c/span>\u003cspan class=\"sum-term\">74 + \u003c/span>\u003cspan class=\"sum-term\">90\u003c/span>\u003c/span>\u003cspan class=\"mean-denominator\">7\u003c/span>\u003c/span>\u003c/span>", "\u003cspan class=\"mean-method\">\u003cspan class=\"method-description\">מחברים את הציון הנמוך ואת הציון הגבוה ומחלקים ב־2.\u003c/span>\u003cspan class=\"mean-fraction\" dir=\"ltr\" role=\"math\" aria-label=\"(62+94) / 2\">\u003cspan class=\"mean-numerator\">\u003cspan class=\"sum-term\">62 + \u003c/span>\u003cspan class=\"sum-term\">94\u003c/span>\u003c/span>\u003cspan class=\"mean-denominator\">2\u003c/span>\u003c/span>\u003c/span>"], "answer": 1, "explanation": "בממוצע סופרים את הציון של כל תלמיד, ולכן 94 מופיע פעמיים. סכום שמונת הציונים הוא \u003cspan class=\"math\">648\u003c/span> ומחלקים ב־8: \u003cspan class=\"math\">648/8=81\u003c/span>. אין להשמיט ציון חוזר, וממוצע שני הקצוות אינו ממוצע כל הנתונים."}, {"type": "number", "label": "מצאו את החציון.", "answer": 82, "explanation": "לאחר סידור: \u003cspan class=\"math\">62, 70, 74, 78, 86, 90, 94, 94\u003c/span>. שני האמצעיים הם 78 ו־86, ולכן \u003cspan class=\"math\">(78+86)/2 = 82\u003c/span>.", "unit": ""}], "drawing": null, "sourceExercise": "סטטיסטיקה 4, 7", "observations": [86, 62, 94, 78, 70, 94, 74, 90], "id": "1-3"}, {"topic": "סטטיסטיקה · בניית דיאגרמה מרשימה", "prompt": "מספר האימונים השבועיים של 8 תלמידים:\u003cdiv class=\"data-row\" dir=\"ltr\">3, 1, 2, 0, 3, 2, 1, 2\u003c/div>בנו דיאגרמת עמודות: סמנו את הגובה המתאים מעל כל מספר אימונים בלחיצה או בגרירה.", "parts": [{"type": "number", "label": "גובה העמודה עבור \u003cspan class=\"math\">0\u003c/span> אימונים", "answer": 1, "explanation": "סופרים ברשימה \u003cspan class=\"math\">1\u003c/span> תלמידים שהתאמנו \u003cspan class=\"math\">0\u003c/span> פעמים.", "unit": "תלמידים"}, {"type": "number", "label": "גובה העמודה עבור \u003cspan class=\"math\">1\u003c/span> אימונים", "answer": 2, "explanation": "סופרים ברשימה \u003cspan class=\"math\">2\u003c/span> תלמידים שהתאמנו \u003cspan class=\"math\">1\u003c/span> פעמים.", "unit": "תלמידים"}, {"type": "number", "label": "גובה העמודה עבור \u003cspan class=\"math\">2\u003c/span> אימונים", "answer": 3, "explanation": "סופרים ברשימה \u003cspan class=\"math\">3\u003c/span> תלמידים שהתאמנו \u003cspan class=\"math\">2\u003c/span> פעמים.", "unit": "תלמידים"}, {"type": "number", "label": "גובה העמודה עבור \u003cspan class=\"math\">3\u003c/span> אימונים", "answer": 2, "explanation": "סופרים ברשימה \u003cspan class=\"math\">2\u003c/span> תלמידים שהתאמנו \u003cspan class=\"math\">3\u003c/span> פעמים.", "unit": "תלמידים"}], "drawing": {"kind": "bars", "title": "מספר האימונים בשבוע", "xLabel": "מספר אימונים", "yLabel": "מספר תלמידים", "labels": [0, 1, 2, 3], "values": null, "editable": true}, "sourceExercise": "סטטיסטיקה 6, 9", "observations": [3, 1, 2, 0, 3, 2, 1, 2], "id": "1-4"}, {"topic": "סטטיסטיקה · שכיחות יחסית של קבוצת ציונים", "prompt": "בטבלה ציוני 10 תלמידים:\u003ctable class=\"data-table\">\u003ccaption>ציוני המבחן\u003c/caption>\u003ctr>\u003cth scope=\"row\">ציון\u003c/th>\u003cth scope=\"col\">60\u003c/th>\u003cth scope=\"col\">70\u003c/th>\u003cth scope=\"col\">80\u003c/th>\u003cth scope=\"col\">90\u003c/th>\u003cth scope=\"col\">100\u003c/th>\u003c/tr>\u003ctr>\u003cth scope=\"row\">שכיחות\u003c/th>\u003ctd>1\u003c/td>\u003ctd>2\u003c/td>\u003ctd>3\u003c/td>\u003ctd>2\u003c/td>\u003ctd>2\u003c/td>\u003c/tr>\u003c/table>", "parts": [{"type": "number", "label": "מה השכיחות היחסית של תלמידים שקיבלו לפחות 80?", "answer": 0.7, "explanation": "כוללים את הציונים 80, 90 ו־100: \u003cspan class=\"math\">(3+2+2)/10 = 7/10\u003c/span>.", "unit": "", "inputFormat": "fraction", "fraction": [7, 10]}, {"type": "number", "label": "מה אחוז התלמידים שקיבלו פחות מ־80?", "answer": 30, "explanation": "כוללים את הציונים 60 ו־70: \u003cspan class=\"math\">(1+2)/10 × 100 = 30\u003c/span>.", "unit": "%"}, {"type": "number", "label": "מה ממוצע הציונים?", "answer": 82, "explanation": "מכפילים כל ציון בשכיחותו: \u003cspan class=\"math\">(60×1+70×2+80×3+90×2+100×2)/10 = 82\u003c/span>.", "unit": ""}], "drawing": null, "sourceExercise": "סטטיסטיקה 2, 8", "observations": [60, 70, 70, 80, 80, 80, 90, 90, 100, 100], "id": "1-5"}, {"topic": "מערכת הצירים · סימון נקודה", "prompt": "סמנו את הנקודה \u003cspan class=\"math\">P(−5, 3)\u003c/span> במערכת הצירים.", "parts": [{"type": "point", "label": "סמנו את P.", "answer": [-5, 3], "explanation": "נעים 5 יחידות שמאלה מהראשית ו־3 יחידות למעלה. מתקבלת \u003cspan class=\"math\">P(−5, 3)\u003c/span>.", "plot": true, "pointLabel": "P"}], "drawing": {"kind": "grid4", "min": -8, "max": 8, "points": [], "segments": []}, "sourceExercise": "מערכת הצירים 1", "id": "1-6"}, {"topic": "מערכת הצירים · קריאה והשוואת נקודות", "prompt": "התבוננו בארבע הנקודות המסומנות.", "parts": [{"type": "point", "label": "רשמו את שיעורי C.", "answer": [-3, -4], "explanation": "קוראים תחילה x ואחר כך y: \u003cspan class=\"math\">C(−3, −4)\u003c/span>.", "plot": false, "pointLabel": "P"}, {"type": "point", "label": "רשמו את שיעורי B.", "answer": [-6, 2], "explanation": "הנקודה B נמצאת 6 יחידות שמאלה ו־2 למעלה: \u003cspan class=\"math\">B(−6, 2)\u003c/span>.", "plot": false, "pointLabel": "P"}, {"type": "choice", "label": "לאיזה זוג נקודות אותו שיעור y?", "options": ["\u003cspan class=\"math\">B, C\u003c/span>", "\u003cspan class=\"math\">A, B\u003c/span>", "\u003cspan class=\"math\">A, D\u003c/span>", "\u003cspan class=\"math\">C, D\u003c/span>"], "answer": 3, "explanation": "C ו־D נמצאות על אותו קו אופקי, בגובה \u003cspan class=\"math\">y = −4\u003c/span>."}], "drawing": {"kind": "grid4", "min": -8, "max": 8, "points": [{"label": "A", "x": 4, "y": 5}, {"label": "B", "x": -6, "y": 2}, {"label": "C", "x": -3, "y": -4}, {"label": "D", "x": 2, "y": -4}], "segments": []}, "sourceExercise": "מערכת הצירים 2", "id": "1-7"}, {"topic": "מערכת הצירים · חישוב אורכי קטעים", "prompt": "נתונות הנקודות \u003cspan class=\"math\">K(−7, 2), L(1, 2)\u003c/span> וכן \u003cspan class=\"math\">M(4, −6), N(4, 3)\u003c/span>. כל יחידה היא סנטימטר אחד.", "parts": [{"type": "number", "label": "מה אורך KL?", "answer": 8, "explanation": "ל־K ול־L אותו שיעור y. מחסרים את שיעורי x: \u003cspan class=\"math\">1−(−7) = 8\u003c/span>.", "unit": "ס״מ"}, {"type": "number", "label": "מה אורך MN?", "answer": 9, "explanation": "ל־M ול־N אותו שיעור x. מחסרים את שיעורי y: \u003cspan class=\"math\">3−(−6) = 9\u003c/span>.", "unit": "ס״מ"}], "drawing": null, "sourceExercise": "מערכת הצירים 4, 5", "id": "1-8"}, {"topic": "מערכת הצירים · השלמת מלבן מקודקודים נגדיים", "prompt": "A ו־C הם קודקודים נגדיים של מלבן: \u003cspan class=\"math\">A(−4, 6), C(2, −1)\u003c/span>. הצלעות מקבילות לצירים, והצלע AB אופקית. הקודקודים מסודרים \u003cspan class=\"math\">A–B–C–D\u003c/span>. כל יחידה היא סנטימטר אחד.", "parts": [{"type": "point", "label": "רשמו את שיעורי B.", "answer": [2, 6], "explanation": "ל־B שיעור x של C ושיעור y של A: \u003cspan class=\"math\">(2, 6)\u003c/span>.", "plot": false, "pointLabel": "P"}, {"type": "point", "label": "רשמו את שיעורי D.", "answer": [-4, -1], "explanation": "ל־D שיעור x של A ושיעור y של C: \u003cspan class=\"math\">(−4, −1)\u003c/span>.", "plot": false, "pointLabel": "P"}, {"type": "number", "label": "חשבו את שטח המלבן.", "answer": 42, "explanation": "אורכי הצלעות הם \u003cspan class=\"math\">2−(−4)=6\u003c/span> ו־\u003cspan class=\"math\">6−(−1)=7\u003c/span>. השטח: \u003cspan class=\"math\">6×7=42\u003c/span>.", "unit": "סמ״ר"}, {"type": "number", "label": "חשבו את היקף המלבן.", "answer": 26, "explanation": "מחברים את ארבע הצלעות: \u003cspan class=\"math\">2×(6+7)=26\u003c/span>.", "unit": "ס״מ"}], "drawing": {"kind": "grid4", "min": -8, "max": 8, "points": [{"label": "A", "x": -4, "y": 6}, {"label": "C", "x": 2, "y": -1}], "segments": []}, "sourceExercise": "מערכת הצירים 6, 9", "solutionDrawing": {"kind": "grid4", "min": -8, "max": 8, "points": [{"label": "A", "x": -4, "y": 6}, {"label": "B", "x": 2, "y": 6}, {"label": "C", "x": 2, "y": -1}, {"label": "D", "x": -4, "y": -1}], "segments": [["A", "B"], ["B", "C"], ["C", "D"], ["D", "A"]]}, "id": "1-9"}, {"topic": "מערכת הצירים · מלבן והזזה ימינה", "prompt": "בשרטוט מלבן ABCD. כל יחידה היא סנטימטר אחד. מזיזים את המלבן 3 יחידות ימינה.", "parts": [{"type": "number", "label": "מה שטח המלבן?", "answer": 30, "explanation": "אורכי הצלעות הם 6 ו־5 ס״מ: \u003cspan class=\"math\">6×5=30\u003c/span>.", "unit": "סמ״ר"}, {"type": "number", "label": "מה היקף המלבן?", "answer": 22, "explanation": "ההיקף הוא \u003cspan class=\"math\">2×(6+5)=22\u003c/span>.", "unit": "ס״מ"}, {"type": "point", "label": "רשמו את שיעורי A′ לאחר ההזזה.", "answer": [1, -3], "explanation": "מוסיפים 3 לשיעור x של A: \u003cspan class=\"math\">−2+3=1\u003c/span>. שיעור y נשאר \u003cspan class=\"math\">−3\u003c/span>.", "plot": false, "pointLabel": "P"}, {"type": "point", "label": "רשמו את שיעורי C′ לאחר ההזזה.", "answer": [7, 2], "explanation": "מוסיפים 3 לשיעור x של C: \u003cspan class=\"math\">4+3=7\u003c/span>. שיעור y נשאר 2.", "plot": false, "pointLabel": "P"}], "drawing": {"kind": "grid4", "min": -8, "max": 8, "points": [{"label": "A", "x": -2, "y": -3}, {"label": "B", "x": 4, "y": -3}, {"label": "C", "x": 4, "y": 2}, {"label": "D", "x": -2, "y": 2}], "segments": [["A", "B"], ["B", "C"], ["C", "D"], ["D", "A"]]}, "sourceExercise": "מערכת הצירים 8, 10", "id": "1-10"}]}</script>
+<script>
+'use strict';
+const EXAM=JSON.parse(document.getElementById('exam-data').textContent);
+const $=id=>document.getElementById(id);
+const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const plain=html=>{const d=document.createElement('div');d.innerHTML=html;return d.textContent;};
+const fmt=n=>String(n).replace(/-/g,'−');
+const key=`ron828-math8-exam-v${EXAM.revision||1}-${EXAM.number}`;
+const fresh=()=>({started:true,finished:false,index:0,answers:EXAM.questions.map(q=>q.parts.map(()=>null))});
+let state=fresh(),showAll=false,storageWorks=true,dialogAction=null,previousFocus=null;
+function fractionParts(raw){
+ if(typeof raw!=='string'||!raw.trim())return ['',''];
+ if(raw.includes('/'))return raw.split('/').map(s=>s.trim());
+ const value=parseNumber(raw);
+ if(Number.isFinite(value))for(let d=1;d<=10000;d++){const n=Math.round(value*d);if(Number.isSafeInteger(n)&&Math.abs(n/d-value)<1e-12)return [String(n),String(d)];}
+ return [raw,'1'];
+}
+function validFraction(raw){
+ if(typeof raw!=='string')return false;
+ if(!raw.includes('/'))return Number.isFinite(parseNumber(raw)); // Keep existing saved numeric answers.
+ const parts=raw.split('/').map(s=>s.trim());
+ return parts.length===2&&parts.every(s=>/^\d+$/.test(s)&&Number.isSafeInteger(Number(s)))&&Number(parts[1])>0;
+}
+function fractionHtml(values){
+ const [top,bottom]=values.map(v=>String(v??''));
+ return `<span class="stacked-fraction" dir="ltr" role="math" aria-label="${esc(top||'?')} חלקי ${esc(bottom||'?')}"><span>${esc(top||'?')}</span><span>${esc(bottom||'?')}</span></span>`;
+}
+function renderFractionFields(field,p,j){
+ const values=fractionParts(state.answers[state.index][j]),group=document.createElement('div');group.className='fraction-input';
+ const help=document.createElement('p');help.id=`help-${j}`;help.className='number-help';help.textContent='אפשר להזין שבר מצומצם או שבר שקול.';
+ const error=document.createElement('p');error.id=`fraction-error-${j}`;error.className='fraction-error';error.setAttribute('aria-live','polite');error.hidden=true;
+ const inputs=[];
+ const validate=()=>{
+  const invalid=inputs.map((input,k)=>input.value.trim()!==''&&(!/^\d+$/.test(input.value.trim())||!Number.isSafeInteger(Number(input.value))||(k===1&&Number(input.value)===0)));
+  inputs.forEach((input,k)=>input.setAttribute('aria-invalid',String(invalid[k])));
+  error.textContent=invalid[0]?'יש להזין במונה מספר שלם שאינו שלילי.':invalid[1]?'יש להזין במכנה מספר שלם גדול מאפס.':'';error.hidden=!error.textContent;
+ };
+ ['מונה','מכנה'].forEach((name,k)=>{
+  if(k){const line=document.createElement('span');line.className='fraction-line';line.setAttribute('aria-hidden','true');group.append(line);}
+  const input=document.createElement('input');input.type='text';input.id=`answer-${j}-${k===0?'numerator':'denominator'}`;input.inputMode='numeric';input.dir='ltr';input.autocomplete='off';input.placeholder=name;input.value=values[k]??'';
+  input.setAttribute('aria-label',plain(p.label)+' – '+name);input.setAttribute('aria-describedby',`${help.id} ${error.id}`);
+  input.addEventListener('input',()=>{const v=inputs.map(i=>i.value.trim());answer(j,v.every(s=>s==='')?null:v.join('/'));validate();});
+  inputs.push(input);group.append(input);
+ });
+ field.append(group,help,error);validate();
+}
+
+function validSaved(p,v){if(v===null)return true;if(p.type==='number'||p.type==='linepoint')return typeof v==='string';if(p.type==='point')return Array.isArray(v)&&v.length===2&&v.every(x=>typeof x==='string');if(p.type==='multi')return Array.isArray(v)&&new Set(v).size===v.length&&v.every(x=>Number.isInteger(x)&&x>=0&&x<p.options.length);return Number.isInteger(v)&&v>=0&&v<p.options.length;}
+try{const saved=JSON.parse(localStorage.getItem(key));if(saved&&typeof saved.started==='boolean'&&typeof saved.finished==='boolean'&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<10&&Array.isArray(saved.answers)&&saved.answers.length===10&&saved.answers.every((a,i)=>Array.isArray(a)&&a.length===EXAM.questions[i].parts.length&&a.every((v,j)=>validSaved(EXAM.questions[i].parts[j],v))))state=saved;}catch(e){storageWorks=false;}
+state.started=true;
+if(!state.finished)state.index=0;
+function save(){try{localStorage.setItem(key,JSON.stringify(state));storageWorks=true;}catch(e){storageWorks=false;}storageMessage();}
+function storageMessage(){$('storage-status').hidden=storageWorks;$('storage-status').textContent=storageWorks?'':'לא ניתן לשמור התקדמות בדפדפן הזה. אפשר לפתור כרגיל, אך יש להשאיר את החלון פתוח עד הסיום.';}
+function parseNumber(raw){if(typeof raw!=='string')return NaN;const s=raw.trim().replace(/−/g,'-').replace(/,/g,'.');const n='[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)';if(new RegExp('^'+n+'$').test(s))return Number(s);if(new RegExp('^'+n+'\\s*/\\s*'+n+'$').test(s)){const [a,b]=s.split('/').map(Number);return b===0?NaN:a/b;}return NaN;}
+function isAnswered(p,v){if(p.inputFormat==='fraction')return validFraction(v);if(p.type==='number'||p.type==='linepoint')return Number.isFinite(parseNumber(v));if(p.type==='point')return Array.isArray(v)&&v.length===2&&v.every(x=>Number.isFinite(parseNumber(x)));if(p.type==='multi')return Array.isArray(v)&&v.length>0&&validSaved(p,v);return Number.isInteger(v)&&v>=0&&v<p.options.length;}
+function correct(p,v){if(!isAnswered(p,v))return false;if(p.type==='number'||p.type==='linepoint')return Math.abs(parseNumber(v)-p.answer)<1e-8;if(p.type==='point')return v.every((x,i)=>Math.abs(parseNumber(x)-p.answer[i])<1e-8);if(p.type==='multi')return v.length===p.answer.length&&p.answer.every(x=>v.includes(x));return v===p.answer;}
+function answeredParts(i){return EXAM.questions[i].parts.filter((p,j)=>isAnswered(p,state.answers[i][j])).length;}
+function grade(){let score=0,fullyCorrect=0,missing=0;const rows=EXAM.questions.map((q,i)=>{const results=q.parts.map((p,j)=>{const good=correct(p,state.answers[i][j]);if(good)score+=10/q.parts.length;if(!isAnswered(p,state.answers[i][j]))missing++;return good;});if(results.every(Boolean))fullyCorrect++;return results;});return {score:Math.round(score*100)/100,fullyCorrect,missing,rows};}
+function svgOpen(viewBox,label,cls=''){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" class="${cls}" role="img" aria-label="${esc(label)}"><title>${esc(label)}</title>`;}
+function txt(x,y,label,cls='',extra=''){return `<text x="${x}" y="${y}" text-anchor="middle" class="${cls}" ${extra}>${esc(label)}</text>`;}
+function line(x1,y1,x2,y2,cls='geometry'){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${cls}"/>`;}
+function arc(cx,cy,r,a1,a2,label){const point=a=>[cx+r*Math.cos(a),cy+r*Math.sin(a)];let diff=a2-a1;while(diff>Math.PI)diff-=2*Math.PI;while(diff<=-Math.PI)diff+=2*Math.PI;const p=point(a1),q=point(a1+diff),mid=a1+diff/2,lr=r+16;return `<path d="M${p[0]} ${p[1]} A${r} ${r} 0 0 ${diff>0?1:0} ${q[0]} ${q[1]}" class="arc"/>`+txt(cx+lr*Math.cos(mid),cy+lr*Math.sin(mid)+5,label,'arc-label');}
+function drawing(d){
+ if(!d)return '';let s='';
+ if(d.kind==='grid4'){
+  const X=x=>260+24*x,Y=y=>250-24*y;
+  s=svgOpen('0 0 520 510','מערכת צירים בארבעת הרביעים, יחידה אחת בין קווי הרשת','coordinate-grid');
+  for(let v=-8;v<=8;v++){
+   s+=line(X(v),Y(-8),X(v),Y(8),'grid')+line(X(-8),Y(v),X(8),Y(v),'grid');
+   if(v && v%2===0){s+=txt(X(v),Y(0)+22,fmt(v),'grid-numbers');s+=txt(X(0)-12,Y(v)+4,fmt(v),'grid-numbers grid-y-label');}
+  }
+  s+=line(50,Y(0),474,Y(0),'axis')+line(X(0),458,X(0),38,'axis');
+  s+='<path d="M464 245L474 250L464 255 M255 48L260 38L265 48" fill="none" stroke="#62758c"/>';
+  s+=txt(488,255,'x')+txt(260,25,'y')+txt(272,273,'0','grid-numbers');
+  const pts=Object.fromEntries((d.points||[]).map(p=>[p.label,p]));
+  for(const[a,b]of d.segments||[]){s+=line(X(pts[a].x),Y(pts[a].y),X(pts[b].x),Y(pts[b].y));}
+  for(const p of d.points||[])s+=`<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="5" class="point"/>`+txt(X(p.x)+12,Y(p.y)-12,p.label,'point-label');
+  s+='</svg>';
+ }
+ if(d.kind==='bars'){
+  s='<p class="chart-caption">'+esc(d.title)+'</p>'+svgOpen('0 0 550 350','דיאגרמת עמודות: '+d.xLabel+' בציר האופקי ו־'+d.yLabel+' בציר האנכי','bar-chart');
+  for(let v=0;v<=5;v++)s+=line(85,275-v*40,485,275-v*40,'grid')+txt(65,281-v*40,v,'bar-label');
+  s+=line(85,275,495,275,'axis')+line(85,275,85,55,'axis');
+  const step=400/d.labels.length;
+  for(let i=0;i<d.labels.length;i++){
+   const h=(d.values?.[i]||0)*40,x=85+(i+.5)*step;
+   if(d.editable)s+=`<g class="bar-control" data-bar-control="${i}" tabindex="0" role="slider" aria-label="גובה העמודה עבור ${esc(d.labels[i])} אימונים" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-valuetext="טרם סומן" aria-orientation="vertical" aria-describedby="bar-controls-help">`;
+   s+=`<rect class="student-bar" data-bar="${i}" x="${x-20}" y="${275-h}" width="40" height="${h}" fill="#8aaef0" stroke="#225bd5"/>`;
+   if(d.editable)s+=`<line class="bar-handle-line" x1="${x-24}" x2="${x+24}" y1="275" y2="275"/><circle class="bar-handle" cx="${x}" cy="275" r="7"/>`+txt(x,256,'–','bar-value')+`<rect class="bar-hit" x="${85+i*step+5}" y="65" width="${step-10}" height="220" fill="transparent"/></g>`;
+   s+=txt(x,299,d.labels[i],'bar-label');
+  }
+  s+=txt(290,335,d.xLabel,'context-axis-title')+txt(22,170,d.yLabel,'context-axis-title','transform="rotate(-90 22 170)"')+'</svg>';
+ }
+ return '<div class="visual">'+s+'</div>';
+}
+function reviewDrawing(q){
+ if(q.solutionDrawing)return drawing(q.solutionDrawing);
+ if(q.drawing?.editable)return drawing({...q.drawing,editable:false,values:q.parts.slice(0,q.drawing.labels.length).map(p=>p.answer)});
+ const p=q.parts.find(p=>p.plot);
+ if(p)return drawing({...q.drawing,points:[...(q.drawing.points||[]),{label:p.pointLabel||'P',x:p.answer[0],y:p.answer[1]}]});
+ return drawing(q.drawing);
+}
+
+function updateProgress(){const full=EXAM.questions.filter((q,i)=>answeredParts(i)===q.parts.length).length;$('question-progress').textContent=`שאלה ${state.index+1} מתוך 10`;$('answered-progress').textContent=`${full} מתוך 10 שאלות נענו במלואן`;$('progress-bar').style.width=`${full*10}%`;$('question-nav').replaceChildren();EXAM.questions.forEach((q,i)=>{const n=answeredParts(i),b=document.createElement('button');b.type='button';b.textContent=i+1;b.className=n===q.parts.length?'answered':n?'partial':'';b.setAttribute('aria-label',`שאלה ${i+1}, ${n===q.parts.length?'נענתה':n?'נענתה חלקית':'טרם נענתה'}`);if(i===state.index)b.setAttribute('aria-current','step');b.addEventListener('click',()=>go(i));$('question-nav').append(b);});}
+function answer(j,value){if(state.finished)return;state.answers[state.index][j]=value;save();updateProgress();}
+function renderAnswerTable(q){
+ const spec=q.answerTable,table=document.createElement('table');
+ table.className='data-table frequency-input-table';
+ const caption=table.createCaption();caption.textContent='טבלת שכיחויות';
+ const head=table.createTHead().insertRow(),row=table.createTBody().insertRow();
+ const title=document.createElement('th');title.scope='row';title.textContent=spec.valueLabel;head.append(title);
+ const label=document.createElement('th');label.scope='row';label.id='frequency-row-label';label.textContent=spec.answerLabel;row.append(label);
+ spec.values.forEach((value,j)=>{
+  const header=document.createElement('th');header.scope='col';header.id=`frequency-value-${j}`;header.textContent=value;head.append(header);
+  const cell=row.insertCell(),input=document.createElement('input');
+  input.id=`answer-${j}`;input.type='text';input.inputMode='numeric';input.dir='ltr';input.autocomplete='off';
+  input.setAttribute('aria-labelledby',`${label.id} ${header.id}`);input.setAttribute('aria-describedby','frequency-table-help');
+  input.value=state.answers[state.index][j]??'';
+  input.addEventListener('input',()=>answer(j,input.value));cell.append(input);
+ });
+ const help=document.createElement('p');help.id='frequency-table-help';help.className='number-help';help.textContent=`${fmt(10/q.parts.length)} נקודות לכל תא.`;
+ $('question-table').append(table,help);
+}
+
+function formatPartLabel(html){
+ const container=document.createElement('span');container.innerHTML=html;
+ const walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT),nodes=[];
+ while(walker.nextNode())if(!walker.currentNode.parentElement.closest('.math,bdi,math'))nodes.push(walker.currentNode);
+ for(const node of nodes){
+  const text=node.textContent,matches=[...text.matchAll(/[A-Za-z]+[′″']*(?:\s*=\s*[+−-]?\d+(?:\.\d+)?)?/g)];
+  if(!matches.length)continue;
+  const fragment=document.createDocumentFragment();let offset=0;
+  for(const match of matches){
+   fragment.append(document.createTextNode(text.slice(offset,match.index)));
+   const token=document.createElement('bdi');token.dir='ltr';token.className='label-symbol';token.textContent=match[0];fragment.append(token);offset=match.index+match[0].length;
+  }
+  fragment.append(document.createTextNode(text.slice(offset)));node.replaceWith(fragment);
+ }
+ return container.innerHTML;
+}
+function partHeading(q,p,j){
+ const prefix=q.parts.length>1?['א','ב','ג','ד','ה','ו','ז','ח','ט','י'][j]+'. ':'';
+ return '<span class="part-heading"><span class="part-label" dir="rtl">'+prefix+formatPartLabel(p.label)+'</span> <span class="part-points" dir="rtl"><bdi dir="ltr">'+fmt(Math.round(1000/q.parts.length)/100)+'</bdi> נקודות</span></span>';
+}
+
+function renderQuestion(focus=true){
+ const q=EXAM.questions[state.index];
+ $('topic').textContent=q.topic;$('question-title').innerHTML=q.prompt;
+ $('question-drawing').innerHTML=drawing(q.drawing);$('parts').replaceChildren();
+ $('question-table').replaceChildren();
+ if(q.answerTable)renderAnswerTable(q);
+ if(!q.answerTable&&!q.drawing?.editable)q.parts.forEach((p,j)=>{
+  const field=document.createElement('fieldset');field.className='part';
+  const legend=document.createElement('legend');legend.id=`label-${j}`;
+  legend.innerHTML=partHeading(q,p,j);field.append(legend);
+  if(p.type==='choice'||p.type==='multi'){
+   const multiple=p.type==='multi';
+   if(multiple){const hint=document.createElement('p');hint.className='multi-instruction';hint.textContent='יש לסמן את כל התשובות הנכונות. הסעיף מזכה בניקוד רק אם נבחרו כולן, ללא תשובות נוספות.';field.append(hint);}
+   const answers=document.createElement('div');answers.className='answers'+(p.options.some(o=>plain(o).length>30)?' wide-options':'')+(p.optionDrawings?' with-diagrams':'');
+   p.options.forEach((option,k)=>{
+    const b=document.createElement('button');b.type='button';b.className='answer'+(multiple?' multiple':'')+(p.optionDrawings?' diagram-option':'');b.id=`answer-${j}-${k}`;
+    const selected=multiple?(state.answers[state.index][j]||[]).includes(k):state.answers[state.index][j]===k;
+    b.setAttribute('aria-pressed',String(selected));
+    b.innerHTML=`<span class="letter" aria-hidden="true">${multiple?(selected?'✓':''):['א','ב','ג','ד','ה','ו'][k]}</span><span class="choice-value">${option}</span>`;
+    if(p.optionDrawings)b.innerHTML+=`<span class="option-diagram">${drawing(p.optionDrawings[k]).match(/<svg[\s\S]*<\/svg>/)[0]}</span>`;
+    b.addEventListener('click',()=>{
+     if(multiple){const set=new Set(state.answers[state.index][j]||[]);set.has(k)?set.delete(k):set.add(k);answer(j,[...set].sort((a,b)=>a-b));}
+     else answer(j,k);
+     for(const [index,btn]of [...answers.children].entries()){
+      const chosen=multiple?(state.answers[state.index][j]||[]).includes(index):index===k;
+      btn.setAttribute('aria-pressed',String(chosen));if(multiple)btn.querySelector('.letter').textContent=chosen?'✓':'';
+     }
+    });answers.append(b);
+   });field.append(answers);
+  }else if(p.inputFormat==='fraction'){renderFractionFields(field,p,j);
+  }else if(p.type==='point'&&p.plot){renderPlotAnswer(field,p,j);
+  }else if(p.type==='point'){
+   const hint=document.createElement('p');hint.className='placement-hint';hint.textContent=p.plot?'אפשר לסמן בלחיצה על מערכת הצירים, או להקליד את שני השיעורים.':'הקלידו תחילה את שיעור x ואחריו את שיעור y. הסעיף נבדק לפי שני השיעורים יחד.';field.append(hint);
+   const row=document.createElement('div');row.className='input-row point-controls';
+   ['x','y'].forEach((axis,k)=>{
+    const label=document.createElement('label');label.innerHTML=`<span>שיעור <span class="math">${axis}</span></span>`;
+    const input=document.createElement('input');input.id=`answer-${j}-${axis}`;input.setAttribute('aria-label',plain(p.label)+' – שיעור '+axis);input.type='text';input.inputMode='decimal';input.dir='ltr';input.autocomplete='off';input.value=state.answers[state.index][j]?.[k]??'';
+    input.addEventListener('input',()=>{const v=['x','y'].map(a=>$(`answer-${j}-${a}`).value);answer(j,v);if(p.plot)updatePlacement(j);});label.append(input);row.append(label);
+   });field.append(row);
+   if(p.plot){const output=document.createElement('output');output.id=`placement-status-${j}`;output.className='placement-status';output.setAttribute('aria-live','polite');field.append(output);}
+  }else{
+   const row=document.createElement('div');row.className='input-row';
+   const input=document.createElement('input');input.id=`answer-${j}`;input.type='text';input.inputMode='decimal';input.dir='ltr';input.autocomplete='off';input.setAttribute('aria-labelledby',legend.id);input.setAttribute('aria-describedby',`help-${j}`);input.value=state.answers[state.index][j]??'';
+   input.addEventListener('input',()=>{answer(j,input.value);if(p.type==='linepoint')updatePlacement(j);if(q.drawing?.editable)updateBars();});row.append(input);
+   if(p.unit){const u=document.createElement('span');u.textContent=p.unit;row.append(u);}field.append(row);
+   const help=document.createElement('p');help.id=`help-${j}`;help.className='number-help';help.textContent='יש להקליד מספר בלבד. אפשר להשתמש בסימן מינוס, בנקודה עשרונית או בשבר כגון 1/2.';field.append(help);
+   if(p.type==='linepoint'){if(p.plot){const output=document.createElement('output');output.id=`placement-status-${j}`;output.className='placement-status';output.setAttribute('aria-live','polite');field.append(output);}}
+  }
+  $('parts').append(field);
+ });
+ const placement=q.parts.findIndex(p=>p.plot);if(placement>=0)bindPlacement(placement);
+ $('previous').disabled=state.index===0;$('next').hidden=state.index===9;$('finish').hidden=state.index!==9;updateProgress();
+ if(q.drawing?.editable)bindBars();
+ if(focus){$('question-title').focus();window.scrollTo({top:0,behavior:'instant'});}
+}
+function placementCoords(j){const q=EXAM.questions[state.index],p=q.parts[j],v=state.answers[state.index][j];if(!isAnswered(p,v))return null;return p.type==='point'?v.map(parseNumber):[parseNumber(v)];}
+
+function renderPlotAnswer(field,p,j){
+ const hint=document.createElement('p');hint.className='placement-hint';hint.textContent='סמנו את הנקודה בלחיצה על מערכת הצירים. לשינוי הסימון, לחצו במקום אחר.';field.append(hint);
+ if(p.plot){const output=document.createElement('output');output.id=`placement-status-${j}`;output.className='placement-status';output.setAttribute('aria-live','polite');field.append(output);}
+ const clear=document.createElement('button');clear.type='button';clear.id=`placement-clear-${j}`;clear.className='secondary';clear.textContent='ניקוי הסימון';
+ clear.addEventListener('click',()=>{answer(j,null);updatePlacement(j);});field.append(clear);
+}
+function updatePlacement(j){
+ const value=placementCoords(j),svg=$('question-drawing').querySelector('svg');svg.querySelector('.user-marker')?.remove();
+ $(`placement-status-${j}`).innerHTML=value?'הסימון שלך: <span class="math">('+value.map(fmt).join(', ')+')</span>':'טרם סומנה נקודה.';
+ $(`placement-clear-${j}`).disabled=!value;
+ if(!value||value.some(v=>v< -8||v>8))return;
+ svg.insertAdjacentHTML('beforeend',`<g class="user-marker" aria-hidden="true"><circle cx="${260+24*value[0]}" cy="${250-24*value[1]}" r="8" fill="#fff" stroke="#7a3cac" stroke-width="3"/><circle cx="${260+24*value[0]}" cy="${250-24*value[1]}" r="3" fill="#7a3cac"/></g>`);
+}
+function bindPlacement(j){
+ const svg=$('question-drawing').querySelector('svg');svg.classList.add('clickable-diagram');svg.setAttribute('tabindex','0');svg.setAttribute('role','group');svg.setAttribute('aria-label','סימון נקודה במערכת צירים בלחיצה. אפשר להזיז את הסימון גם במקשי החצים.');
+ const clamp=v=>Math.max(-8,Math.min(8,v));
+ const apply=coords=>{answer(j,coords.map(String));updatePlacement(j);};
+ svg.addEventListener('click',event=>{const p=new DOMPoint(event.clientX,event.clientY).matrixTransform(svg.getScreenCTM().inverse());if(p.x<68||p.x>452||p.y<58||p.y>442)return;apply([clamp(Math.round((p.x-260)/24)),clamp(Math.round((250-p.y)/24))]);});
+ svg.addEventListener('keydown',e=>{if(['Delete','Backspace'].includes(e.key)){e.preventDefault();answer(j,null);updatePlacement(j);return;}if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const v=placementCoords(j)||[0,0],axis=['ArrowLeft','ArrowRight'].includes(e.key)?0:1;v[axis]=clamp(v[axis]+(['ArrowLeft','ArrowDown'].includes(e.key)?-1:1));apply(v);});
+ updatePlacement(j);
+}
+
+
+function updateBars(){
+ const q=EXAM.questions[state.index];if(!q.drawing?.editable)return;
+ let marked=0;
+ for(let i=0;i<q.drawing.labels.length;i++){
+  const control=$('question-drawing').querySelector(`[data-bar-control="${i}"]`),bar=control.querySelector('.student-bar'),v=parseNumber(state.answers[state.index][i]),valid=Number.isFinite(v)&&v>=0&&v<=5,height=valid?v*40:0,y=275-height;
+  if(valid)marked++;
+  bar.setAttribute('y',y);bar.setAttribute('height',height);
+  control.classList.toggle('is-set',valid);control.setAttribute('aria-valuenow',valid?v:0);control.setAttribute('aria-valuetext',valid?`${v} תלמידים`:'טרם סומן');
+  control.querySelector('.bar-handle').setAttribute('cy',y);
+  const handle=control.querySelector('.bar-handle-line');handle.setAttribute('y1',y);handle.setAttribute('y2',y);
+  const value=control.querySelector('.bar-value');value.setAttribute('y',y-18);value.textContent=valid?fmt(v):'–';
+ }
+ $('bar-controls-status').textContent=`סומנו ${marked} מתוך ${q.drawing.labels.length} עמודות.`;
+}
+function bindBars(){
+ const container=$('question-drawing'),svg=container.querySelector('svg');
+ svg.classList.add('editable-bars');svg.setAttribute('role','group');svg.setAttribute('aria-label','קביעת גובה העמודות בלחיצה, בגרירה או במקשי החצים');
+ const help=document.createElement('p');help.id='bar-controls-help';help.className='bar-controls-help';help.textContent='לחצו בגובה הרצוי או גררו את הידית. אפשר גם לבחור עמודה ולשנות בעזרת החצים. למחיקת סימון השתמשו ב־Delete.';
+ const status=document.createElement('p');status.id='bar-controls-status';status.className='bar-controls-status';status.setAttribute('aria-live','polite');container.append(help,status);
+ for(const control of svg.querySelectorAll('[data-bar-control]')){
+  const i=Number(control.dataset.barControl);let activePointer=null;
+  const apply=value=>{const next=value===null?null:String(Math.max(0,Math.min(5,Math.round(value))));if(state.answers[state.index][i]===next)return;answer(i,next);updateBars();};
+  const setFromPointer=event=>{const point=new DOMPoint(event.clientX,event.clientY).matrixTransform(svg.getScreenCTM().inverse());apply((275-point.y)/40);};
+  control.addEventListener('pointerdown',event=>{if(!event.isPrimary||event.button!==0)return;event.preventDefault();control.focus({preventScroll:true});activePointer=event.pointerId;control.setPointerCapture(activePointer);setFromPointer(event);});
+  control.addEventListener('pointermove',event=>{if(event.pointerId===activePointer)setFromPointer(event);});
+  control.addEventListener('pointerup',event=>{if(event.pointerId!==activePointer)return;setFromPointer(event);if(control.hasPointerCapture(activePointer))control.releasePointerCapture(activePointer);activePointer=null;});
+  control.addEventListener('pointercancel',()=>{activePointer=null;});
+  control.addEventListener('lostpointercapture',()=>{activePointer=null;});
+  control.addEventListener('keydown',event=>{
+   if(!['ArrowUp','ArrowDown','ArrowRight','ArrowLeft','Home','End','Delete','Backspace',' ','Enter'].includes(event.key))return;
+   event.preventDefault();const current=parseNumber(state.answers[state.index][i]),v=Number.isFinite(current)?current:0;
+   if(['Delete','Backspace'].includes(event.key))apply(null);
+   else if(event.key==='Home')apply(0);else if(event.key==='End')apply(5);
+   else if([' ','Enter'].includes(event.key))apply(v);
+   else apply(v+(['ArrowUp','ArrowRight'].includes(event.key)?1:-1));
+  });
+ }
+ updateBars();
+}
+
+function go(i){state.index=i;save();renderQuestion();}
+function show(){document.title=EXAM.title+' · מתמטיקה לכיתה ח׳';$('title').textContent=EXAM.title;$('quiz').hidden=state.finished;$('results').hidden=!state.finished;storageMessage();if(state.finished)renderResults();else renderQuestion(false);}
+function answerHtml(p,v){
+ if(v===null||v===''||(Array.isArray(v)&&v.length===0))return 'לא נענתה';
+ if(p.inputFormat==='fraction')return fractionHtml(fractionParts(v));
+ if(p.type==='choice')return p.options[v]??'לא נענתה';
+ if(p.type==='multi')return '<span class="answer-list">'+v.map(i=>'<span>'+p.options[i]+'</span>').join('')+'</span>';
+ if(p.type==='point')return '<span class="math">('+v.map(x=>x===''?'?':esc(x)).join(', ')+')</span>';
+ return '<span class="math">'+esc(v)+'</span>'+(p.unit?' '+esc(p.unit):'');
+}
+function solutionHtml(p){if(p.inputFormat==='fraction')return fractionHtml(p.fraction);
+ if(p.type==='choice')return p.options[p.answer];
+ if(p.type==='multi')return '<span class="answer-list">'+p.answer.map(i=>'<span>'+p.options[i]+'</span>').join('')+'</span>';
+ if(p.type==='point')return '<span class="math">('+p.answer.map(fmt).join(', ')+')</span>';
+ return '<span class="math">'+fmt(p.answer)+'</span>'+(p.unit?' '+esc(p.unit):'');
+}
+function renderResults(){const g=grade();$('score-value').textContent=g.score;$('result-summary').textContent=`${g.fullyCorrect} מתוך 10 שאלות נענו נכון במלואן. ניתן ניקוד גם על סעיפים נכונים.`+(g.missing?` ${g.missing} סעיפים לא נענו או מולאו באופן לא תקין.`:'');$('review-title').textContent=showAll?'כל השאלות והפתרונות':'הטעויות והסברים לתיקון';$('toggle-review').textContent=showAll?'הצגת הטעויות בלבד':'הצגת כל הפתרונות';$('toggle-review').setAttribute('aria-pressed',String(showAll));let content='';EXAM.questions.forEach((q,i)=>{if(!showAll&&g.rows[i].every(Boolean))return;const points=g.rows[i].filter(Boolean).length*10/q.parts.length;content+=`<article class="card review"><h3>שאלה ${i+1} · ${esc(q.topic)} <span class="part-points">${Math.round(points*100)/100} מתוך 10 נקודות</span></h3><div class="prompt">${q.prompt}</div>${reviewDrawing(q)}`;q.parts.forEach((p,j)=>{const good=g.rows[i][j];content+=`<div class="review-part ${good?'correct':'wrong'}"><p><strong>${q.parts.length>1?['א','ב','ג','ד','ה','ו','ז','ח','ט','י'][j]+'. ':''}${formatPartLabel(p.label)}</strong></p><p class="${good?'good':'bad'}"><strong>${good?'✓ תשובה נכונה':'✕ יש לתקן'}</strong></p><p>התשובה שלך: ${answerHtml(p,state.answers[i][j])}</p>${good?'':`<p><strong>התשובה הנכונה: ${solutionHtml(p)}</strong></p>`}${p.optionDrawings?`<div class="review-option">${drawing(p.optionDrawings[p.answer])}</div>`:''}<p class="solution">${p.explanation}</p></div>`;});content+='</article>';});$('review-list').innerHTML=content||'<div class="card empty-review"><strong>כל התשובות נכונות — כל הכבוד!</strong><p>אפשר לעיין בכל הפתרונות באמצעות הכפתור למעלה.</p></div>';}
+function closeDialog(){ $('dialog-overlay').hidden=true;document.body.classList.remove('modal-open');document.querySelector('main').inert=false;dialogAction=null;if(previousFocus)previousFocus.focus();}
+function dialog(title,description,confirmLabel,action,cancelLabel='חזרה למבחן'){previousFocus=document.activeElement;dialogAction=action;$('dialog-title').textContent=title;$('dialog-description').textContent=description;$('dialog-confirm').textContent=confirmLabel;$('dialog-cancel').textContent=cancelLabel;$('dialog-overlay').hidden=false;document.body.classList.add('modal-open');document.querySelector('main').inert=true;$('dialog-cancel').focus();}
+$('dialog-cancel').addEventListener('click',closeDialog);$('dialog-confirm').addEventListener('click',()=>{const a=dialogAction;closeDialog();if(a)a();});$('dialog-overlay').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeDialog();}if(e.key==='Tab'){e.preventDefault();(document.activeElement===$('dialog-cancel')?$('dialog-confirm'):$('dialog-cancel')).focus();}});
+$('previous').addEventListener('click',()=>go(Math.max(0,state.index-1)));$('next').addEventListener('click',()=>go(Math.min(9,state.index+1)));
+$('finish').addEventListener('click',()=>{const missing=EXAM.questions.reduce((n,q,i)=>n+q.parts.length-answeredParts(i),0);dialog('לסיים את המבחן?',missing?`נותרו ${missing} סעיפים ללא תשובה תקינה. סעיפים אלה יקבלו 0 נקודות. אחרי הסיום יוצגו הציון והפתרונות ולא ניתן יהיה לשנות תשובות.`:'כל השאלות נענו. אחרי הסיום יוצגו הציון והפתרונות ולא ניתן יהיה לשנות תשובות.','סיום והצגת הציון',()=>{state.finished=true;save();show();$('result-title').focus();window.scrollTo({top:0,behavior:'instant'});});});
+$('restart').addEventListener('click',()=>dialog('להתחיל מחדש?','התשובות והציון של הניסיון הנוכחי יימחקו מהקובץ הזה בדפדפן. ניתן להדפיס את התוצאות לפני שמתחילים שוב.','התחלה מחדש',()=>{state=fresh();showAll=false;save();show();$('question-title').focus();window.scrollTo({top:0,behavior:'instant'});},'חזרה לתוצאות'));
+$('toggle-review').addEventListener('click',()=>{showAll=!showAll;renderResults();});$('print').addEventListener('click',()=>{showAll=true;renderResults();window.print();});
+show();
+</script>
+<script>
+// Arithmetic only: parse numbers, parentheses and the four basic operations.
+function calculateExpression(raw){
+ const source=String(raw).replace(/\s/g,'').replace(/[×*]/g,'*').replace(/[÷/]/g,'/').replace(/−/g,'-').replace(/,/g,'.');
+ if(!source)throw new Error('הקלידו תרגיל לחישוב.');
+ if(source.length>240)throw new Error('התרגיל ארוך מדי.');
+ let index=0;
+ const invalid=()=>{throw new Error('בדקו את המספרים, הפעולות והסוגריים בתרגיל.');};
+ function primary(){
+  if(source[index]==='+'){index++;return primary();}
+  if(source[index]==='-'){index++;return -primary();}
+  if(source[index]==='('){index++;const value=sum();if(source[index++]!==')')invalid();return value;}
+  const token=source.slice(index).match(/^(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?/);
+  if(!token)invalid();index+=token[0].length;return Number(token[0]);
+ }
+ function product(){let value=primary();while(source[index]==='*'||source[index]==='/'){const op=source[index++],right=primary();if(op==='/'&&right===0)throw new Error('אי אפשר לחלק באפס.');value=op==='*'?value*right:value/right;}return value;}
+ function sum(){let value=product();while(source[index]==='+'||source[index]==='-'){const op=source[index++],right=product();value=op==='+'?value+right:value-right;}return value;}
+ const value=sum();if(index!==source.length)invalid();if(!Number.isFinite(value))throw new Error('התוצאה גדולה מדי.');return value;
+}
+function calculatorText(value){return String(Number(value.toPrecision(12))).replace(/-/g,'−');}
+function initCalculator(){
+ const toggle=document.getElementById('calculator-toggle'),panel=document.getElementById('calculator-panel'),input=document.getElementById('calculator-expression'),output=document.getElementById('calculator-result'),error=document.getElementById('calculator-error');
+ let completed=false,completedExpression='';
+ const focusInput=()=>input.focus({preventScroll:true});
+ const edited=()=>{completed=false;error.hidden=true;error.textContent='';input.setAttribute('aria-invalid','false');output.textContent='—';};
+ const open=value=>{panel.hidden=!value;toggle.setAttribute('aria-expanded',String(value));document.body.classList.toggle('calculator-open',value);if(value)focusInput();else toggle.focus({preventScroll:true});};
+ const run=()=>{try{const result=calculateExpression(input.value);output.textContent=calculatorText(result);error.hidden=true;error.textContent='';input.setAttribute('aria-invalid','false');completed=true;completedExpression=input.value;}catch(e){output.textContent='—';error.textContent=e.message;error.hidden=false;input.setAttribute('aria-invalid','true');completed=false;}};
+ const insert=text=>{
+  if(completed){input.value=/^[+−×÷*/-]$/.test(text)?'('+completedExpression+')':'';input.setSelectionRange(input.value.length,input.value.length);}
+  const start=input.selectionStart??input.value.length,end=input.selectionEnd??start;
+  if(input.value.length-(end-start)+text.length>240)return;
+  input.setRangeText(text,start,end,'end');edited();focusInput();
+ };
+ toggle.addEventListener('click',()=>open(panel.hidden));document.getElementById('calculator-close').addEventListener('click',()=>open(false));
+ panel.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();event.stopPropagation();open(false);}});
+ input.addEventListener('input',edited);
+ input.addEventListener('keydown',event=>{
+  if(event.key==='Enter'||event.key==='='){event.preventDefault();run();}
+  else if(completed&&!event.ctrlKey&&!event.metaKey&&!event.altKey&&/^[0-9.+×÷*/−()-]$/.test(event.key)){event.preventDefault();insert(event.key);}
+ });
+ for(const button of panel.querySelectorAll('[data-calc-key]'))button.addEventListener('click',()=>insert(button.dataset.calcKey));
+ for(const button of panel.querySelectorAll('[data-calc-action]'))button.addEventListener('click',()=>{
+  const action=button.dataset.calcAction;
+  if(action==='equals')run();
+  else if(action==='clear'){input.value='';edited();}
+  else{const start=input.selectionStart??input.value.length,end=input.selectionEnd??start;input.setRangeText('',start===end?Math.max(0,start-1):start,end,'end');edited();}
+  focusInput();
+ });
+}
+initCalculator();
+
+</script></body>
+</html>
+
